@@ -15,46 +15,50 @@
 
 ### BUG-01: Thành viên có thể mượn sách vượt quá giới hạn cho phép (Tối đa 3 cuốn)
 
+## Danh sách báo cáo lỗi (Bug Reports) - REQ-04
+
+### BUG-01: Thành viên có thể mượn sách vượt quá giới hạn cho phép (Tối đa 3 cuốn)
+
 | Thuộc tính | Chi tiết |
 |-----------|---------|
 | **Mã lỗi** | BUG-01 |
 | **TC liên quan** | `TC-16` |
 | **REQ liên quan** | `REQ-04` — Mượn sách |
 | **Mức độ** | High / Critical |
-| **Người phát hiện** | `` |
-| **Ngày phát hiện** | 23/05/2026 |
+| **Người phát hiện** | Nguyễn Hoàng Anh |
+| **Ngày phát hiện** | 24/05/2026 |
 | **Trạng thái** | Open |
 
 **Tiêu đề:**
-Hệ thống không chặn hành động mượn sách khi tài khoản thành viên hoạt động đã mượn vượt quá số lượng giới hạn tối đa cho phép (3 cuốn).
+Hệ thống không giới hạn số lượng sách mượn tối đa của thành viên, cho phép mượn cuốn thứ 4 và thứ 5 mà không có thông báo chặn lỗi.
 
 **Môi trường:**
 - Trình duyệt: Chrome (Phiên bản mới nhất)
-- Hệ điều hành: Windows / macOS / Linux ``
+- Hệ điều hành: Windows 11
 - Ngôn ngữ giao diện: Tiếng Việt
 
 **Điều kiện tiên quyết:**
-Hệ thống ở trạng thái dữ liệu gốc ban đầu (sau khi reset hoặc vừa tải lại trang), tài khoản thành viên đang ở trạng thái hoạt động (Active).
+Hệ thống ở trạng thái dữ liệu gốc, tài khoản thành viên đang ở trạng thái hoạt động bình thường (Active).
 
 **Bước tái hiện:**
-1. Truy cập hệ thống https://stqa.rbc.vn và đăng nhập bằng tài khoản `dam.tran@email.com` / `password123`.
-2. Truy cập danh sách sách, tiến hành nhấn nút "Mượn sách" (Borrow) lần lượt cho 3 cuốn sách bất kỳ đang ở trạng thái "Sẵn sàng" (Ví dụ: BOOK001, BOOK002, BOOK003).
-3. Tìm tiếp cuốn sách thứ 4 đang ở trạng thái "Sẵn sàng" (Ví dụ: BOOK004) và tiếp tục nhấn nút "Mượn sách".
+1. Truy cập hệ thống https://stqa.rbc.vn và tiến hành đăng nhập bằng tài khoản `dam.tran@email.com` / `password123`.
+2. Tại màn hình danh sách sách, lần lượt nhấn nút "Mượn sách" (Borrow) cho 3 cuốn sách bất kỳ đang "Sẵn sàng" (Ví dụ: BOOK001, BOOK002, BOOK003).
+3. Tiếp tục tìm cuốn sách thứ 4 đang ở trạng thái "Sẵn sàng" (Ví dụ: BOOK004) và nhấn nút "Mượn sách".
 
 **Kết quả mong đợi:**
-Hệ thống phải chặn hành động mượn sách ở cuốn thứ 4 (bước 3), không cho phép tạo thêm phiếu mượn và hiển thị thông báo lỗi rõ ràng trên giao diện: "Đã đạt giới hạn mượn tối đa (3 cuốn)".
+Hệ thống phải kiểm tra số lượng sách đang mượn, chặn hành động mượn cuốn thứ 4 và hiển thị thông báo lỗi rõ ràng trên giao diện theo đặc tả SRS §3.1: "Đã đạt giới hạn mượn tối đa (3 cuốn)".
 
 **Kết quả thực tế:**
-Hệ thống vẫn cho phép mượn thành công cuốn sách thứ 4 (và các cuốn tiếp theo). Cuốn sách đổi trạng thái sang "Đã mượn" bình thường và không xuất hiện bất kỳ thông báo lỗi chặn giới hạn nào.
+Hệ thống không chặn, vẫn cho phép tạo phiếu mượn thành công cho cuốn thứ 4 (và tiếp tục cho phép mượn thêm nhiều cuốn khác). Sách đổi trạng thái sang "Đã mượn" bình thường.
 
 **Tác động:**
-Vi phạm quy tắc nghiệp vụ cốt lõi của thư viện được mô tả trong tài liệu đặc tả SRS (§3.1), gây thất thoát sách và sai lệch logic quản lý số lượng mượn trả.
+Vi phạm nghiêm trọng quy tắc nghiệp vụ (Business Rule) cốt lõi của thư viện được mô tả trong tài liệu SRS, dẫn đến việc quản lý thất thoát sách và sai lệch số liệu.
 
 **Minh chứng:**
-`TÍ CHÈN ẢNH`
+``
 
 **Đề xuất xử lý:**
-Bổ sung một hàm kiểm tra (Validation check) ở phía Backend và Frontend tại thời điểm người dùng nhấn nút "Mượn sách": Đếm tổng số lượng phiếu mượn chưa trả của User ID hiện tại, nếu kết quả $\ge 3$ thì lập tức trả về lỗi và vô hiệu hóa nút bấm.
+Bổ sung một hàm kiểm tra logic (Validation) trước khi xử lý mượn: Đếm số phiếu mượn có trạng thái chưa trả của UserID hiện tại, nếu kết quả $\ge 3$ thì chặn hành động và trả về thông báo lỗi ở cả Frontend và Backend.
 
 ## BUG-02
 
