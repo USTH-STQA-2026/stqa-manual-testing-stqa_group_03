@@ -55,3 +55,28 @@
 | **TC-08-03** | REQ-08: Tra cứu phiếu mượn | Khối thông tin của phiếu (ví dụ `BR003`) hiển thị đầy đủ 5 trường thông tin, phông chữ ngay ngắn không chồng chéo, nhãn trạng thái trực quan. | Khối thông tin hiển thị rõ ràng, không bị lỗi font hay đè chữ. Đầy đủ mã phiếu, tên sách, tên người mượn, cặp ngày và nhãn trạng thái trực quan. | **Pass** | <img src="docs/assets/evidence-tc-req08-03.png" width="150"> | Không có |
 | **TC-08-04** | REQ-08: Tra cứu phiếu mượn | Đăng nhập sai thông tin, hệ thống từ chối truy cập và chặn hoàn toàn không cho tiếp cận phân hệ tra cứu phiếu mượn. | Hệ thống báo lỗi đăng nhập, giữ nguyên màn hình đăng nhập và bảo mật thông tin, không để lộ dữ liệu tra cứu phiếu mượn ra ngoài. | **Pass** | <img src="docs/assets/evidence-tc-req08-04.png" width="150"> | Không có |
 | **TC-08-05** | REQ-08: Tra cứu phiếu mượn | Đăng nhập tài khoản có trạng thái Tạm ngưng/Hết hạn nhưng không có phiếu nào, màn hình hiển thị thông báo trống: "Chưa có phiếu mượn nào." | Giao diện không hiện phiếu của người khác, hệ thống xử lý phân quyền tốt và hiển thị màn hình trống kèm dòng chữ thông báo: "Chưa có phiếu mượn nào." | **Pass** | <img src="docs/assets/evidence-tc-req08-05.png" width="150"> | Không có |
+
+## Tổng hợp kết quả
+
+| Chỉ số | Giá trị |
+| :--- | :--- |
+| Tổng số test case | **39** |
+| Pass | **31** |
+| Fail | **6** |
+| Blocked | **2** |
+| Not Run | **0** |
+| **Tỷ lệ Pass** | **79.49%** |
+
+### Kết quả theo nhóm chức năng
+
+| Nhóm | Tổng TC | Pass | Fail | Blocked | Tỷ lệ Pass |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| REQ-01: Đăng nhập | 5 | 5 | 0 | 0 | 100.00% |
+| REQ-02: Xem danh sách sách | 4 | 4 | 0 | 0 | 100.00% |
+| REQ-03: Tìm kiếm & Lọc sách | 6 | 5 | 1 | 0 | 83.33% |
+| REQ-04: Mượn sách | 5 | 4 | 1 | 0 | 80.00% |
+| REQ-05: Trả sách | 5 | 3 | 1 | 1 | 60.00% |
+| REQ-06: Xử lý quá hạn | 5 | 3 | 1 | 1 | 60.00% |
+| REQ-07: Quản lý thành viên | 4 | 2 | 2 | 0 | 50.00% |
+| REQ-08: Tra cứu phiếu mượn | 5 | 5 | 0 | 0 | 100.00% |
+| **Tổng cộng** | **39** | **31** | **6** | **2** | **79.49%** |
