@@ -165,3 +165,17 @@
 | **TC-08-05** | Kiểm tra quyền bảo mật tra cứu của các tài khoản Thành viên có trạng thái đặc biệt (Tạm ngưng / Hết hạn) | Trình duyệt đã được làm mới (F5) để khôi phục dữ liệu gốc. Người dùng đang ở màn hình đăng nhập.                    | 1. Thực hiện đăng nhập lần lượt với từng tài khoản có trạng thái đặc biệt.<br>2. Di chuyển đến tab **"Phiếu mượn của tôi"**.<br>3. Quan sát danh sách hiển thị và thông báo ở giữa màn hình.                                                                                                                                      | **Tài khoản 1 (Tạm ngưng):** `cu.le@email.com`<br>**Tài khoản 2 (Hết hạn):** `binh.pham@email.com`                                  | Hệ thống đảm bảo an toàn thông tin phân quyền: Vì cả hai tài khoản này không sở hữu phiếu nào trong dữ liệu gốc, giao diện bắt buộc không được hiển thị phiếu của người khác và phải xuất hiện thông báo trống rõ ràng: "Chưa có phiếu mượn nào."                                                     | REQ-08 | Kiểm thử trạng thái dữ liệu (State-Based Testing) |
 
 ---
+
+### Tổng hợp
+
+| Nhóm chức năng                | Số TC  | REQ phủ | Kỹ thuật IDM áp dụng                                 |
+| :---------------------------- | :----: | :-----: | :--------------------------------------------------- |
+| Đăng nhập                     |   5    | REQ-01  | Phân lớp tương đương (EP), Giá trị biên (BVA)        |
+| Xem danh sách sách            |   4    | REQ-02  | Happy path, Phân quyền, Đồng bộ dữ liệu              |
+| Tìm kiếm & Lọc sách           |   6    | REQ-03  | Happy path, Robustness testing, Xử lý chuỗi          |
+| Mượn sách                     |   5    | REQ-04  | Bảng quyết định (Decision Table), Giá trị biên (BVA) |
+| Trả sách                      |   5    | REQ-05  | Happy path, Negative testing, UX, Bảo mật            |
+| Xử lý quá hạn                 |   5    | REQ-06  | Happy path, Phân tích dữ liệu rỗng, Phân quyền       |
+| Quản lý thành viên / Thêm mới |   4    | REQ-07  | Phân lớp tương đương (EP), Kiểm thử bảo mật          |
+| Tra cứu phiếu mượn            |   5    | REQ-08  | Phân lớp tương đương (EP), UI Testing, State-Based   |
+| **Tổng**                      | **39** |         |                                                      |
