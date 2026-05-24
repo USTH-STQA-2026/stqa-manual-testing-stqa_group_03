@@ -4,12 +4,12 @@
 > Xem [examples/sample-test-case.md](../examples/sample-test-case.md) để hiểu cách viết TC tốt.
 > Tự tổ chức và phân nhóm test case theo cách hợp lý nhất.
 
-| Thông tin      |                       |
-| -------------- | --------------------- |
-| **Nhóm**       | `<!-- Tên nhóm -->`   |
-| **Ngày tạo**   | `<!-- DD/MM/YYYY -->` |
-| **Hệ thống**   | https://stqa.rbc.vn   |
-| **Tham chiếu** | SRS v1.0              |
+| Thông tin      |                          |
+| -------------- | ------------------------ |
+| **Nhóm**       | `<!-- STQA_Group_03 -->` |
+| **Ngày tạo**   | `<!-- 19/05/2026 -->`    |
+| **Hệ thống**   | https://stqa.rbc.vn      |
+| **Tham chiếu** | SRS v1.0                 |
 
 ---
 
@@ -114,8 +114,6 @@
 > 💡 **Gợi ý kỹ thuật**: Sử dụng **Phân lớp tương đương (EP)** cho các phân vùng rời rạc, **Phân tích giá trị biên (BVA)** cho các phân vùng số (ví dụ: giới hạn 3 sách). Xem textbook §6.1–6.3.
 
 ---
-
-## Bước 2: Test Cases
 
 <!-- Tự tổ chức bảng test case: có thể chia nhóm theo chức năng, theo REQ, hoặc theo luồng nghiệp vụ — tùy nhóm quyết định. -->
 <!-- Mỗi TC phải ánh xạ ngược về ít nhất 1 dòng trong bảng IDM ở Bước 1. -->
