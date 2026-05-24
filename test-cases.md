@@ -1,118 +1,40 @@
-# Step 1: Input Domain Modeling (IDM)
+# Test Cases — Bảng trường hợp kiểm thử (Thành viên C)
 
-## ## IDM – View Book List (REQ-02)
-
-| Characteristic | Block / Partition | Representative Value | Expected Result |
-|---|---|---|---|
-| User role visibility | Member | `dam.tran@email.com` | Display book list with 5 required fields |
-| | Librarian | `librarian@email.com` | Display book list with 5 required fields and administrative tools |
-| Book information fields | Complete fields | `BOOK001` | Show Title, Author, Category, Publish Year, Status |
-| Real-time state change | Book status modified | `BOOK003` changes to Borrowed | Status updates on screen instantly without reloading |
-
-## ## IDM – Search & Filter Books (REQ-03)
-
-| Characteristic | Block / Partition | Representative Value | Expected Result |
-|---|---|---|---|
-| Search case sensitivity | Lowercase / Uppercase | `flutter` / `FLUTTER` | Display matching books (Case-insensitive) |
-| Search input format | Contains trailing/leading spaces | `" Flutter "` | System trims spaces and displays matching books |
-| Category filter logic | Valid category selection | `Công nghệ` | Display books belonging only to selected category |
-| Search & Filter combination | Filter applied + Unrelated Search | Filter `Kinh tế` + Search `Flutter` | Display empty result "Không tìm thấy sách" |
+| Thông tin      |                       |
+| -------------- | --------------------- |
+| **Nhóm** | Nhóm STQA - ICT Gen 15|
+| **Ngày tạo** | 23/05/2026            |
+| **Hệ thống** | https://stqa.rbc.vn   |
+| **Tham chiếu** | SRS v1.0              |
 
 ---
 
-# Step 2: Test Cases (Thành viên C)
+## Bước 1: Mô hình hóa miền đầu vào — Input Domain Modeling (IDM)
 
-## ## Test Cases – REQ-02 View Book List
+### IDM — Xem danh sách sách (REQ-02)
 
-### TC-01: Verify book list UI fields completeness
-* **Yêu cầu:** REQ-02 (View Book List)
-* **Loại kiểm thử:** Happy Path
-* **Mô tả:** Đảm bảo hệ thống hiển thị đầy đủ 5 trường thông tin bắt buộc cho mỗi cuốn sách theo tài liệu SRS.
-* **Các bước thực hiện:**
-  1. Truy cập hệ thống và đăng nhập.
-  2. Quan sát giao diện thẻ sách ở trang chủ.
-* **Dữ liệu đầu vào:** Tài khoản hợp lệ.
-* **Kết quả mong đợi:** Mỗi thẻ sách hiển thị đủ 5 thông tin: Tên sách, Tác giả, Thể loại, Năm xuất bản và Trạng thái.
+| Đặc tính (Characteristic)  | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi             |
+| -------------------------- | ----------------- | ------------------------ | ---------------------------- |
+| Quyền (Role) người dùng    | Thành viên        | `dam.tran@email.com`     | Cho phép truy cập, hiển thị giao diện danh sách thân thiện với người dùng. |
+|                            | Thủ thư           | `librarian@email.com`    | Cho phép truy cập, hiển thị danh sách sách đi kèm các công cụ quản trị. |
+| Hiển thị thông tin sách    | Đầy đủ các trường | Mã sách: `BOOK001`       | Mỗi thẻ sách hiển thị đủ 5 thông tin: Tên sách, Tác giả, Thể loại, Năm xuất bản, Trạng thái. |
+| Đồng bộ dữ liệu            | Thay đổi Real-time| Sách chuyển sang "Đang mượn" | Trạng thái cập nhật tức thì trên màn hình các phiên làm việc khác không cần tải lại trang. |
 
-### TC-02: Verify book list accessibility for Member role
-* **Yêu cầu:** REQ-02 (View Book List)
-* **Loại kiểm thử:** Permission
-* **Mô tả:** Xác minh tài khoản Member có quyền xem danh sách sách.
-* **Các bước thực hiện:** Đăng nhập bằng tài khoản Member và kiểm tra trang chủ.
-* **Dữ liệu đầu vào:** `ba.nguyen@email.com` / `password123`
-* **Kết quả mong đợi:** Hiển thị danh sách sách dành cho Thành viên.
+### IDM — Tìm kiếm & Lọc sách (REQ-03)
 
-### TC-03: Verify book list accessibility for Librarian role
-* **Yêu cầu:** REQ-02 (View Book List)
-* **Loại kiểm thử:** Permission
-* **Mô tả:** Xác minh tài khoản Librarian có quyền xem danh sách.
-* **Các bước thực hiện:** Đăng nhập bằng tài khoản Librarian và kiểm tra trang chủ.
-* **Dữ liệu đầu vào:** `librarian@email.com` / `admin123`
-* **Kết quả mong đợi:** Hiển thị danh sách sách kèm các công cụ quản lý.
-
-### TC-04: Verify real-time status update on borrow action
-* **Yêu cầu:** REQ-02 (View Book List)
-* **Loại kiểm thử:** Real-time update
-* **Mô tả:** Trạng thái sách tự động cập nhật ngay lập tức khi có người mượn mà không cần tải lại trang.
-* **Các bước thực hiện:**
-  1. Mở 2 tab. Tab 1 đăng nhập Librarian, Tab 2 đăng nhập Member.
-  2. Tại Tab 2, bấm Mượn cuốn `BOOK001`.
-  3. Quan sát Tab 1 (Không F5).
-* **Dữ liệu đầu vào:** Mượn sách `BOOK001`.
-* **Kết quả mong đợi:** Trạng thái cuốn `BOOK001` ở Tab 1 tự động chuyển sang "Đang mượn".
+| Đặc tính (Characteristic)  | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi             |
+| -------------------------- | ----------------- | ------------------------ | ---------------------------- |
+| Nhập ký tự tìm kiếm        | Viết thường       | `"flutter"`              | Trả về kết quả chính xác không phân biệt hoa thường. |
+|                            | Viết hoa          | `"FLUTTER"`              | Trả về kết quả chính xác không phân biệt hoa thường. |
+| Định dạng chuỗi ký tự      | Chứa khoảng trắng | `" Flutter "`            | Hệ thống tự động xóa khoảng trắng thừa (trim space) và tìm đúng sách. |
+| Logic bộ lọc Thể loại      | Chọn danh mục     | Thể loại: `"Công nghệ"`  | Danh sách hiển thị thu hẹp, chỉ chứa các sách thuộc đúng thể loại được chọn. |
+| Kết hợp Tìm kiếm & Lọc     | Điều kiện AND     | Thể loại: `"Kinh tế"` + Từ khóa: `"Flutter"` | Trả về danh sách trống và hiển thị thông báo "Không tìm thấy sách". |
+| Khôi phục danh sách        | Hủy bỏ bộ lọc/tìm | Thực hiện xóa/reset      | Giao diện xóa từ khóa và bộ lọc, tải lại toàn bộ danh sách sách mặc định đầy đủ. |
 
 ---
 
-## ## Test Cases – REQ-03 Search & Filter Books
+## Bước 2: Bảng chi tiết Test Cases
 
-### TC-05: Search book with standard keywords
-* **Yêu cầu:** REQ-03 (Search Books)
-* **Loại kiểm thử:** Happy Path
-* **Mô tả:** Hệ thống tìm kiếm đúng sách khi nhập từ khóa bình thường.
-* **Các bước thực hiện:** Nhập từ khóa vào ô tìm kiếm và nhấn Enter.
-* **Dữ liệu đầu vào:** `flutter`
-* **Kết quả mong đợi:** Hiển thị các sách có chứa từ "Flutter".
-
-### TC-06: Search book with UPPERCASE keyword
-* **Yêu cầu:** REQ-03 (Search Books)
-* **Loại kiểm thử:** Equivalence Partitioning
-* **Mô tả:** Hệ thống không phân biệt chữ hoa/thường.
-* **Các bước thực hiện:** Nhập từ khóa IN HOA.
-* **Dữ liệu đầu vào:** `FLUTTER`
-* **Kết quả mong đợi:** Trả về kết quả giống TC-05.
-
-### TC-07: Search book with leading and trailing spaces
-* **Yêu cầu:** REQ-03 (Search Books)
-* **Loại kiểm thử:** Exception Handling / Data Formatting
-* **Mô tả:** Hệ thống phải tự động xóa khoảng trắng thừa ở đầu/cuối từ khóa trước khi tìm kiếm.
-* **Các bước thực hiện:**
-  1. Nhập từ khóa có chứa dấu cách ở đầu và cuối.
-  2. Nhấn Enter.
-* **Dữ liệu đầu vào:** `" Flutter "` (Có dấu cách 2 bên).
-* **Kết quả mong đợi:** Hệ thống tự động trim khoảng trắng và hiển thị danh sách sách "Flutter".
-
-### TC-08: Filter books by a valid Category
-* **Yêu cầu:** REQ-03 (Filter Books)
-* **Loại kiểm thử:** Happy Path
-* **Mô tả:** Bộ lọc phân loại hoạt động chính xác.
-* **Các bước thực hiện:** Chọn một thể loại từ Dropdown.
-* **Dữ liệu đầu vào:** Thể loại `Công nghệ`.
-* **Kết quả mong đợi:** Chỉ hiển thị các cuốn sách thuộc thể loại "Công nghệ".
-
-### TC-09: Filter and Search conflict handling
-* **Yêu cầu:** REQ-03 (Search & Filter)
-* **Loại kiểm thử:** Logic / Edge Case
-* **Mô tả:** Kiểm tra logic kết hợp giữa tìm kiếm và lọc thể loại.
-* **Các bước thực hiện:**
-  1. Chọn bộ lọc Thể loại là `Kinh tế`.
-  2. Tại ô tìm kiếm, gõ từ khóa của sách Công nghệ.
-* **Dữ liệu đầu vào:** Filter `Kinh tế` + Search `Flutter`.
-* **Kết quả mong đợi:** Hệ thống báo "Không tìm thấy sách" (Do sách Flutter không thuộc thể loại Kinh tế).
-
-### TC-10: Reset Filter and Search to display full book list
-* **Yêu cầu:** REQ-03 (Search & Filter)
-* **Loại kiểm thử:** State Reset
-* **Mô tả:** Danh sách quay về trạng thái đầy đủ sau khi xóa tìm kiếm/lọc.
-* **Các bước thực hiện:** Xóa tìm kiếm và Reset dropdown bộ lọc.
-* **Dữ liệu đầu vào:** Clear inputs.
-* **Kết quả mong đợi:** Hiển thị lại toàn bộ danh sách sách.
+| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi (Strong Oracle) | REQ | Kỹ thuật |
+| ----- | ----------------- | -------------- | -------------- | --------------- | ---------------- | --- | -------- |
+| **TC-02-01** | Xem danh sách – Kiểm tra độ hiển thị đầy đủ các trường UI | Đăng nhập hệ thống bằng một tài khoản bất kỳ. | 1. Truy cập vào trang chủ hệ thống.<br
