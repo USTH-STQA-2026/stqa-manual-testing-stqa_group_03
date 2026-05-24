@@ -64,20 +64,17 @@
 
 ---
 
-## Bước 2: Test Cases
+## Bước 2: Bảng chi tiết Test Cases
 
-<!-- Tự tổ chức bảng test case: có thể chia nhóm theo chức năng, theo REQ, hoặc theo luồng nghiệp vụ — tùy nhóm quyết định. -->
-<!-- Mỗi TC phải ánh xạ ngược về ít nhất 1 dòng trong bảng IDM ở Bước 1. -->
-
-| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-| | | | | | | | |
-
----
-
-## Tổng hợp
-
-| Nhóm chức năng | Số TC | REQ phủ | Kỹ thuật IDM áp dụng |
-|----------------|-------|---------|----------------------|
-| | | | |
-| **Tổng** | **<!-- ≥ 20 -->** | | |
+| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi (Strong Oracle) | REQ | Kỹ thuật |
+|---|---|---|---|---|---|---|---|
+| **TC-02-01** | Xem danh sách – Kiểm tra độ hiển thị đầy đủ các trường UI | Đăng nhập hệ thống bằng một tài khoản bất kỳ. | 1. Truy cập vào trang chủ hệ thống.<br>2. Quan sát thẻ sách bất kỳ (vd: BOOK001). | Tài khoản hợp lệ | Mỗi thẻ sách hiển thị đủ 5 thông tin: Tên sách, Tác giả, Thể loại, Năm xuất bản, Trạng thái. | REQ-02 | Giao diện (UI) |
+| **TC-02-02** | Xem danh sách – Kiểm tra hiển thị đối với vai trò Thành viên | Đăng nhập bằng tài khoản Thành viên. | 1. Truy cập trang chủ hệ thống.<br>2. Kiểm tra giao diện danh sách sách. | `dam.tran@email.com` | Danh sách hiển thị bình thường, giao diện được tối ưu cho Thành viên mượn sách. | REQ-02 | Phân quyền (Role-based) |
+| **TC-02-03** | Xem danh sách – Kiểm tra hiển thị đối với vai trò Thủ thư | Đăng nhập bằng tài khoản Thủ thư. | 1. Di chuyển đến mục quản lý sách.<br>2. Kiểm tra giao diện danh sách. | `librarian@email.com` | Danh sách hiển thị đầy đủ, đi kèm các công cụ quản trị dành riêng cho Thủ thư. | REQ-02 | Phân quyền (Role-based) |
+| **TC-02-04** | Xem danh sách – Kiểm tra đồng bộ trạng thái sách (Real-time) | 2 tài khoản đăng nhập trên 2 phiên làm việc độc lập. | 1. Tại TK Thành viên, mượn sách `BOOK003`.<br>2. Tại TK Thủ thư, quan sát trạng thái sách (không F5). | Sách: `BOOK003` | Trạng thái cuốn `BOOK003` trên màn hình Thủ thư lập tức đổi sang "Đang mượn" (không cần F5). | REQ-02 | Kiểm thử chức năng / Real-time |
+| **TC-03-01** | Tìm kiếm sách bằng từ khóa viết thường | Đang ở trang chủ hệ thống. | 1. Nhập từ khóa chữ thường vào ô tìm kiếm.<br>2. Nhấn Enter. | `"flutter"` | Hệ thống trả về đúng cuốn sách "Lập trình Flutter cơ bản". | REQ-03 | Happy Path / EP |
+| **TC-03-02** | Tìm kiếm sách không phân biệt chữ hoa/thường | Đang ở trang chủ hệ thống. | 1. Nhập từ khóa viết hoa toàn bộ.<br>2. Nhấn Enter. | `"FLUTTER"` | Hệ thống không phân biệt hoa/thường, trả về đúng cuốn sách "Lập trình Flutter cơ bản". | REQ-03 | Phân lớp tương đương (EP) |
+| **TC-03-03** | Tự động xóa khoảng trắng ở 2 đầu từ khóa (Trim Space) | Đang ở trang chủ hệ thống. | 1. Nhập từ khóa có dấu cách thừa ở đầu và cuối.<br>2. Nhấn Enter. | `" Flutter "` | Hệ thống tự động cắt bỏ khoảng trắng (trim) và tìm đúng cuốn sách "Lập trình Flutter cơ bản". | REQ-03 | Kiểm thử giá trị biên (BVA) / Xử lý chuỗi |
+| **TC-03-04** | Lọc danh sách sách theo Thể loại | Đang ở trang chủ hệ thống. | 1. Mở Dropdown bộ lọc Thể loại.<br>2. Chọn một danh mục. | Thể loại: `"Công nghệ"` | Danh sách chỉ hiển thị những cuốn sách thuộc thể loại Công nghệ, không lọt sách khác vào. | REQ-03 | Happy Path / EP |
+| **TC-03-05** | Xung đột khi tìm kiếm kết hợp bộ lọc không liên quan | Đang ở trang chủ hệ thống. | 1. Chọn bộ lọc Thể loại là "Kinh tế".<br>2. Gõ từ khóa tìm kiếm sách công nghệ.<br>3. Nhấn Enter. | Filter: `"Kinh tế"`<br>Search: `"Flutter"` | Kết hợp bằng toán tử AND: Hệ thống báo "Không tìm thấy sách" (do Flutter không thuộc mảng Kinh tế). | REQ-03 | Bảng quyết định (Decision Table) |
+| **TC-03-06** | Hủy điều kiện lọc/tìm kiếm để xem lại toàn bộ sách | Đang ở màn hình hiển thị kết quả tìm kiếm/lọc. | 1. Xóa chữ trong ô tìm kiếm.<br>2. Hủy chọn bộ lọc Thể loại. | Thao tác Xóa / Reset | Hệ thống lập tức tự động tải và hiển thị lại toàn bộ danh sách sách mặc định ban đầu. | REQ-03 | Chuyển đổi trạng thái (State Transition) |
