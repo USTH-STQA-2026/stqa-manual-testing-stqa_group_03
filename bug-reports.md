@@ -1,116 +1,51 @@
----
+# Bug Reports — Danh sách báo cáo lỗi chi tiết (Thành viên C)
 
-# BUG-10
+### BUG-REQ02-01: Trạng thái mượn sách không tự động cập nhật theo thời gian thực giữa các phiên làm việc
+* **Mã Test Case liên quan:** TC-04
+* **Mức độ nghiêm trọng (Severity):** Medium (Lỗi chức năng không đồng bộ dữ liệu thời gian thực - Functional Issue)
+* **Môi trường lỗi:** Production/Staging (`https://stqa.rbc.vn`)
+* **Mô tả chi tiết:** Trạng thái khả dụng của tài liệu không tự động đồng bộ hóa tức thời giữa các tài khoản người dùng đang đăng nhập đồng thời trên hệ thống. Khi có người mượn tài liệu thành công, các phiên làm việc khác không nhận được cập nhật cho đến khi thực hiện tải lại trang theo cách thủ công.
 
-## Bug ID
-BUG-10
+* **Các bước tái hiện (Steps to Reproduce):**
+  1. Đăng nhập hệ thống đồng thời bằng 2 phiên làm việc khác nhau: Phiên 1 bằng tài khoản Thủ thư (`librarian@email.com`), Phiên 2 bằng tài khoản Thành viên (`dam.tran@email.com`).
+  2. Tại cả 2 phiên, cùng mở màn hình trang chủ và quan sát cuốn sách mang mã số `BOOK001` (Trạng thái hiện tại trên màn hình là "Có sẵn").
+  3. Tại phiên 2 (Thành viên), thực hiện nhấn nút mượn cuốn sách `BOOK001`.
+  4. Quay lại màn hình của phiên 1 (Thủ thư) và quan sát trạng thái của cuốn sách `BOOK001` mà không thực hiện hành động tải lại trang (F5).
 
-## Title
-Book status does not synchronize in real-time between active sessions
-
-## Environment
-- Browser: Chrome v136.0
-- Operating System: Windows 11
-- Application: ABC Library Management System
-- URL: https://stqa.rbc.vn
-
-## Preconditions
-- User A and User B are logged in simultaneously on different devices/browsers.
-
-## Steps to Reproduce
-1. User A and User B view the homepage simultaneously.
-2. User B clicks to borrow `BOOK001`.
-3. Observe the screen of User A without refreshing.
-
-## Expected Result
-The status of `BOOK001` on User A's screen should immediately update to "Borrowed" (Đang mượn).
-
-## Actual Result
-The status remains "Available" (Có sẵn) on User A's screen until manual refresh (F5).
-
-## Severity
-**Medium**
-
-## Related Test Case
-TC-04 — Verify real-time status update on borrow action
-
-## Suggested Fix
-Implement WebSocket or Server-Sent Events (SSE) to broadcast status changes to active clients.
+* **Kết quả thực tế (Actual Result):** Trên màn hình của Thủ thư, trạng thái cuốn sách `BOOK001` vẫn giữ nguyên trạng thái cũ là "Có sẵn".
+* **Kết quả mong đợi (Expected Result):** Hệ thống phải tự động đồng bộ dữ liệu tức thì theo thời gian thực (Real-time), chuyển trạng thái cuốn sách `BOOK001` trên màn hình Thủ thư sang "Đang mượn" mà không cần tải lại trang.
+* **Minh chứng đính kèm:** `[evidence/bug_10.png]`
 
 ---
 
-# BUG-11
+### BUG-REQ03-01: Hệ thống tìm kiếm lỗi khi từ khóa chứa khoảng trắng ở đầu hoặc cuối (Thiếu logic Trim Space)
+* **Mã Test Case liên quan:** TC-07
+* **Mức độ nghiêm trọng (Severity):** Medium (Lỗi xử lý định dạng dữ liệu đầu vào - Functional Bug)
+* **Môi trường lỗi:** Production/Staging (`https://stqa.rbc.vn`)
+* **Mô tả chi tiết:** Thanh tìm kiếm không thực hiện xử lý chuẩn hóa chuỗi đầu vào (Cắt bỏ khoảng trắng thừa). Khi người dùng nhập từ khóa có chứa dấu cách ở đầu hoặc cuối chuỗi, hệ thống sẽ gộp luôn dấu cách đó vào từ khóa tìm kiếm chính xác, dẫn đến việc không tìm thấy tài liệu phù hợp.
 
-## Bug ID
-BUG-11
+* **Các bước tái hiện (Steps to Reproduce):**
+  1. Truy cập vào trang chủ hệ thống bằng một tài khoản Thành viên hợp lệ.
+  2. Tại ô tìm kiếm sách, nhập chuỗi từ khóa có chứa khoảng trắng ở cả hai đầu: `" Flutter "` (có dấu cách phía trước và dấu cách phía sau chữ Flutter).
+  3. Nhấn phím Enter hoặc biểu tượng tìm kiếm để thực thi truy vấn.
 
-## Title
-Search fails when keyword contains leading or trailing spaces (No Trim logic)
-
-## Environment
-- Browser: Chrome v136.0
-- Operating System: Windows 11
-- Application: ABC Library Management System
-- URL: https://stqa.rbc.vn
-
-## Preconditions
-- The book "Lập trình Flutter cơ bản" exists in the database.
-
-## Steps to Reproduce
-1. Navigate to the search bar.
-2. Enter the keyword with spaces: `" Flutter "` (space before and after).
-3. Press Enter.
-
-## Expected Result
-The system should automatically trim the spaces and return the book "Lập trình Flutter cơ bản".
-
-## Actual Result
-The system fails to trim the string, treats the spaces as part of the exact keyword, and displays "Không tìm thấy sách".
-
-## Severity
-**Medium**
-
-## Related Test Case
-TC-07 — Search book with leading and trailing spaces
-
-## Suggested Fix
-Call the `.trim()` method on the search input string in the frontend or backend before executing the database query.
+* **Kết quả thực tế (Actual Result):** Hệ thống trả về kết quả trống kèm thông báo "Không tìm thấy sách", mặc dù cuốn sách "Lập trình Flutter cơ bản" đang tồn tại trên hệ thống.
+* **Kết quả mong đợi (Expected Result):** Hệ thống phải tự động loại bỏ (trim) các khoảng trắng dư thừa ở đầu và cuối chuỗi ký tự trước khi thực hiện truy vấn và trả về kết quả chính xác là cuốn sách "Lập trình Flutter cơ bản".
+* **Minh chứng đính kèm:** `[evidence/bug_11.png]`
 
 ---
 
-# BUG-12
+### BUG-REQ03-02: Ô tìm kiếm ghi đè và bỏ qua hoàn toàn điều kiện lọc của Thể loại sách (Xung đột Search & Filter)
+* **Mã Test Case liên quan:** TC-09
+* **Mức độ nghiêm trọng (Severity):** High (Lỗi sai logic nghiệp vụ kết hợp điều kiện lọc - Functional Bug)
+* **Môi trường lỗi:** Production/Staging (`https://stqa.rbc.vn`)
+* **Mô tả chi tiết:** Hệ thống không áp dụng đồng thời (logic toán tử AND) giữa bộ lọc Thể loại và Ô tìm kiếm từ khóa. Khi người dùng đang chọn một Thể loại cụ thể, việc gõ từ khóa tìm kiếm sẽ ghi đè hoàn toàn bộ lọc này, dẫn đến hiển thị kết quả sai lệch với điều kiện danh mục đang chọn.
 
-## Bug ID
-BUG-12
+* **Các bước tái hiện (Steps to Reproduce):**
+  1. Tại thanh công cụ lọc của giao diện trang chủ, nhấp chọn bộ lọc Thể loại là **"Kinh tế"**.
+  2. Tại ô tìm kiếm sách, nhập vào từ khóa của một cuốn sách thuộc thể loại Công nghệ: **"Flutter"**.
+  3. Tiến hành thực thi tìm kiếm và quan sát danh sách kết quả hiển thị trên màn hình.
 
-## Title
-Search query overrides and ignores active Category Filter logic
-
-## Environment
-- Browser: Chrome v136.0
-- Operating System: Windows 11
-- Application: ABC Library Management System
-- URL: https://stqa.rbc.vn
-
-## Preconditions
-- Sách "Flutter" thuộc thể loại "Công nghệ".
-
-## Steps to Reproduce
-1. Click the Category dropdown and select "Kinh tế".
-2. Type `Flutter` into the search bar.
-3. Observe the results.
-
-## Expected Result
-The list should be empty ("Không tìm thấy sách") because "Flutter" does not belong to the "Kinh tế" category. Both Search and Filter logic should apply simultaneously (AND logic).
-
-## Actual Result
-The system completely ignores the "Kinh tế" category filter and displays the "Flutter" book from the "Công nghệ" category.
-
-## Severity
-**High**
-
-## Related Test Case
-TC-09 — Filter and Search conflict handling
-
-## Suggested Fix
-Update the API logic to combine search and filter using `AND` operators in the SQL query: `WHERE category_id = X AND (title LIKE '%Y%' OR author LIKE '%Y%')`.
+* **Kết quả thực tế (Actual Result):** Hệ thống bỏ qua bộ lọc "Kinh tế" đang kích hoạt và hiển thị cuốn sách "Lập trình Flutter cơ bản" (thuộc thể loại Công nghệ) lên màn hình kết quả.
+* **Kết quả mong đợi (Expected Result):** Hệ thống phải áp dụng kết hợp đồng thời cả hai điều kiện lọc (Thể loại = Kinh tế AND Từ khóa = Flutter). Do sách Flutter thuộc nhóm Công nghệ chứ không phải Kinh tế, hệ thống bắt buộc phải hiển thị trống và thông báo "Không tìm thấy sách".
+* **Minh chứng đính kèm:** `[evidence/bug_12.png]`
