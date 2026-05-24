@@ -9,7 +9,7 @@
 
 ---
 
-## 1. BUG-01: Chặn nhầm email hợp lệ
+## 1. BUG-REQ01-01: Chặn nhầm email hợp lệ
 
 **Bug ID:** BUG-01 (Tham chiếu: TC-REQ07-01)
 
@@ -319,7 +319,7 @@ Kiểm tra lại câu lệnh truy vấn dữ liệu SQL (hoặc logic câu lện
 
 ---
 
-## 2. BUG-02: Bỏ lọt email sai định dạng
+## 8. BUG-REQ07-02: Bỏ lọt email sai định dạng
 
 **Bug ID:** BUG-02 (Tham chiếu: TC-REQ07-02)
 
