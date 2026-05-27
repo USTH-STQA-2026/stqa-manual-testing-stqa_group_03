@@ -13,7 +13,7 @@
 
 | Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Mã Bug (Xem chi tiết tại bug_reports.md) |
 |---|---|---|---|---|---|---|
-| **TC-05-01** | Trả sách | Trả thành công, sách thành "Có sẵn", không cảnh báo | Trả thành công, thông báo hiện, sách thành 'Có sẵn', không cảnh báo | **PASS** | ![images/TC-05-01.png] | |
+| **TC-05-01** | Trả sách | Trả thành công, sách thành "Có sẵn", không cảnh báo | Trả thành công, thông báo hiện, sách thành 'Có sẵn', không cảnh báo | **PASS** | `[images/TC-05-01.png]` | |
 | **TC-05-02** | Trả sách | Trả thành công, có cảnh báo quá hạn | Không có dữ liệu quá hạn trên môi trường test, chưa thể tạo data quá hạn | **BLOCKED** | | |
 | **TC-05-03** | Trả sách | Hệ thống ẩn nút "Trả sách" trên phiếu đã trả | Không hiển thị nút "Trả sách" trên phiếu đã trả → ngăn chặn được việc bấm lại | **PASS** | `[images/TC-05-03.jpeg]` | |
 | **TC-05-04** | Trả sách | Chuyển hướng về trang đăng nhập | Chuyển hướng thành công về trang login | **PASS** | `[images/TC-05-04.png]` | |
