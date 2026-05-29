@@ -16,7 +16,8 @@
 
 | Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
 | ----- | -------------- | -------------------------- | --------------- | -------- | ---------- | --- |
-| **TC-01-01** | REQ-01: Đăng nhập | Đăng nhập thành công với email và mật khẩu hợp lệ, chuyển sang trang chủ. | Hệ thống đăng nhập thành công, chuyển sang trang chủ. AppBar hiển thị đúng tên và vai trò. | **Pass** | <img src="image-1.png" width="150"> | Không có |
+| **TC-01-01** | REQ-01: Đăng nhập | Đăng nhập thành công với email và mật khẩu hợp lệ, chuyển sang trang chủ. | Hệ thống đăng nhập thành công, chuyển sang trang chủ. AppBar hiển thị đúng tên và vai trò. | **Pass** | <img width="3806" height="1999" alt="image" src="https://github.com/user-attachments/assets/a4269639-d797-46d1-9c71-c7be024383e8" />
+ | Không có |
 | **TC-01-02** | REQ-01: Đăng nhập | Từ chối đăng nhập với mật khẩu sai, báo lỗi "Mật khẩu không đúng". | Hệ thống từ chối đăng nhập, hiển thị đúng thông báo lỗi mật khẩu. | **Pass** | <img src="image-2.png" width="150"> | Không có |
 | **TC-01-03** | REQ-01: Đăng nhập | Từ chối đăng nhập với email không tồn tại, báo lỗi "Không tìm thấy thành viên". | Hệ thống từ chối đăng nhập, hiển thị chính xác thông báo lỗi tài khoản không tồn tại. | **Pass** | <img src="image-3.png" width="150"> | Không có |
 | **TC-01-04** | REQ-01: Đăng nhập | Báo lỗi "Vui lòng nhập email và mật khẩu" khi bỏ trống trường nhập liệu. | Hiển thị đúng thông báo yêu cầu nhập liệu, không gửi request lên máy chủ. | **Pass** | <img src="image-4.png" width="150"> | Không có |
