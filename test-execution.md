@@ -3,7 +3,8 @@
 | Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
 |-------|---------------|---------------------------|-----------------|---------|-----------|----|
 | **TC-01** | REQ-02 View Book List | Thẻ sách hiển thị đủ 5 thông tin theo SRS. | Thẻ sách hiện đầy đủ: Tên, Tác giả, Thể loại, Năm XB, Trạng thái. | **Pass** | `N/A` | `N/A` |
-| **TC-02** | REQ-02 View Book List | Member xem được danh sách sách. | Member xem danh sách sách bình thường. | **Pass** | `N/A` | `N/A` |
+| **TC-02** | REQ-02 View Book List | Member xem được danh sách sách. | Member xem danh sách sách bình thường. | **Pass** | <img width="1568" height="1441" alt="image" src="https://github.com/user-attachments/assets/63be7907-3f22-4c75-a819-81839e6cb874" />
+ | `N/A` |
 | **TC-03** | REQ-02 View Book List | Librarian xem được danh sách sách. | Librarian xem danh sách bình thường. | **Pass** | `N/A` | `N/A` |
 | **TC-04** | REQ-02 View Book List | Trạng thái sách cập nhật Real-time. | Trạng thái không tự động đồng bộ khi có người khác mượn sách (phải F5 mới cập nhật). | **Fail** | `evidence/bug_10.png` | `BUG-REQ02-01` |
 | **TC-05** | REQ-03 Search Books | Tìm `flutter` ra đúng sách. | Hệ thống hiển thị đúng các sách liên quan. | **Pass** | `N/A` | `N/A` |
