@@ -144,7 +144,8 @@ Hệ thống không xử lý loại bỏ khoảng trắng thừa trong chuỗi t
 
 **Minh chứng:**
 
-* Ảnh chụp màn hình đính kèm: `<img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/8f657417-80d3-4532-a058-3c198600b08a" />* Quan sát thấy sau khi tìm kiếm với từ khóa `" Flutter "`, hệ thống hiển thị lại toàn bộ danh sách sách thay vì kết quả liên quan đến Flutter.
+* Ảnh chụp màn hình đính kèm: `<img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/8f657417-80d3-4532-a058-3c198600b08a" />
+* Quan sát thấy sau khi tìm kiếm với từ khóa `" Flutter "`, hệ thống hiển thị lại toàn bộ danh sách sách thay vì kết quả liên quan đến Flutter.
 
 **Đề xuất xử lý:**
 
