@@ -376,7 +376,7 @@ Dữ liệu rác, sai định dạng được đưa vào hệ thống cơ sở d
 
 **Minh chứng:**
 
-- Ảnh chụp màn hình đính kèm: `docs/assets/bug02-chap-nhan-email-sai.png` _(Hiển thị thông báo thêm thành công với email sai)_.
+- Ảnh chụp màn hình đính kèm: <img width="2880" height="1704" alt="image" src="https://github.com/user-attachments/assets/b7646897-4028-4cbc-b910-4d067b610f11" />_(Hiển thị thông báo thêm thành công với email sai)_.
 
 **Đề xuất xử lý:**
 Bổ sung hoặc cập nhật lại biểu thức chính quy (Regex Validation) kiểm tra email. Bắt buộc phải có điều kiện kiểm tra sự tồn tại của ít nhất một dấu chấm (`.`) nằm ở phía sau ký tự `@` (Ví dụ: `@domain.com`).
