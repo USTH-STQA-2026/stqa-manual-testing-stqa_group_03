@@ -163,7 +163,7 @@ Hệ thống không xử lý loại bỏ khoảng trắng thừa trong chuỗi t
 
 ## 4. BUG-REQ03-02: Ô tìm kiếm ghi đè và bỏ qua hoàn toàn điều kiện lọc của Thể loại sách
 
-**Bug ID:** BUG-04 (Tham chiếu: TC-03-04)
+**Bug ID:** BUG-04 (Tham chiếu: TC-03-05)
 
 **Tiêu đề:** Xung đột logic giữa ô Tìm kiếm và bộ lọc Thể loại, hệ thống bỏ qua điều kiện lọc danh mục khi người dùng nhập từ khóa (Xung đột Search & Filter)
 
@@ -198,7 +198,7 @@ Vi phạm nghiêm trọng logic nghiệp vụ kết hợp điều kiện lọc (
 
 **Minh chứng:**
 
-- Ảnh chụp màn hình đính kèm: `evidence/bug_12.png` _(Hiển thị thanh dropdown đang chọn "Kinh tế" nhưng kết quả bên dưới lại hiện sách "Công nghệ")_.
+- Ảnh chụp màn hình đính kèm: <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/392fc0a5-d6c9-4ea4-8bcb-c9f6c7e46b57" />_(Hiển thị thanh dropdown đang chọn "Kinh tế" nhưng kết quả bên dưới lại hiện sách "Công nghệ")_.
 
 **Đề xuất xử lý:**
 Cập nhật lại hàm xử lý truy vấn dữ liệu (Query Logic) ở Backend hoặc hàm Filter ở Frontend. Đảm bảo rằng cấu trúc điều kiện lấy dữ liệu phải truyền đồng thời cả 2 tham số: `where thể_loại = selected_category AND tên_sách LIKE %keyword%`, thay vì để hàm này ghi đè lên hàm kia.
