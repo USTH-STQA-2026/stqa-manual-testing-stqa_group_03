@@ -47,7 +47,7 @@ Nghiệp vụ thêm mới thành viên bị chặn một cách sai lệch đối
 
 **Minh chứng:**
 
-- Ảnh chụp màn hình đính kèm: `docs/assets/bug01-email-hop-le-bi-loi.png` _(Hiển thị form nhập liệu và thông báo lỗi đỏ)_.
+- Ảnh chụp màn hình đính kèm: <img width="2880" height="1704" alt="image" src="https://github.com/user-attachments/assets/a02adc22-5e26-4691-94ea-6b4fed411f35" />_(Hiển thị form nhập liệu và thông báo lỗi đỏ)_.
 
 **Đề xuất xử lý:**
 Kiểm tra lại hàm kiểm tra định dạng email (Regex Validation) ở mã nguồn Frontend và Backend. Cần cập nhật Regex để cho phép ký tự dấu chấm (`.`) nằm ở phần Tên người dùng (Local part - trước dấu `@`).
