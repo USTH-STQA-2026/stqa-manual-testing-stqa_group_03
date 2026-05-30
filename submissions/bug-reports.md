@@ -331,7 +331,7 @@ Lỗi nghiêm trọng làm sai lệch tính năng báo cáo dữ liệu. Khiến
 
 **Minh chứng:**
 
-- Ảnh chụp màn hình đính kèm: `images/TC-06-03.jpeg` _(Hiển thị ô dropdown đang lọc chữ "Quá hạn" nhưng danh sách bên dưới vẫn hiện hàng loạt phiếu "Đã trả")_.
+- Ảnh chụp màn hình đính kèm: <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/a8243258-9d0f-4664-a867-131a5e19046a" /> _(Hiển thị ô dropdown đang lọc chữ "Quá hạn" nhưng danh sách bên dưới vẫn hiện hàng loạt phiếu "Đã trả")_.
 
 **Đề xuất xử lý:**
 Kiểm tra lại câu lệnh truy vấn dữ liệu SQL (hoặc logic câu lệnh điều kiện Filter ở Backend). Chỉnh sửa điều kiện mệnh đề `WHERE` để đảm bảo hệ thống bóc tách chính xác trạng thái dựa trên mã định danh cụ thể (Ví dụ: `where status = 'OVERDUE'`), tránh việc viết sai điều kiện logic `OR` hoặc gộp nhầm nhóm dữ liệu cũ đã cập nhật.
