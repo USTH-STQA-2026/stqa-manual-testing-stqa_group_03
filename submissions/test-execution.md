@@ -61,22 +61,22 @@
 | Chỉ số | Giá trị |
 | :--- | :--- |
 | Tổng số test case | **39** |
-| Pass | **30** |
-| Fail | **7** |
+| Pass | **29** |
+| Fail | **8** |
 | Blocked | **2** |
 | Not Run | **0** |
-| **Tỷ lệ Pass** | **76.92%** |
+| **Tỷ lệ Pass** | **74.35%** |
 
 ### Kết quả theo nhóm chức năng
 
 | Nhóm | Tổng TC | Pass | Fail | Blocked | Tỷ lệ Pass |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | REQ-01: Đăng nhập | 5 | 5 | 0 | 0 | 100.00% |
-| REQ-02: Xem danh sách sách | 4 | 4 | 0 | 0 | 100.00% |
+| REQ-02: Xem danh sách sách | 4 | 3 | 1 | 0 | 75.00% |
 | REQ-03: Tìm kiếm & Lọc sách | 6 | 4 | 2 | 0 | 66.66% |
 | REQ-04: Mượn sách | 5 | 4 | 1 | 0 | 80.00% |
 | REQ-05: Trả sách | 5 | 3 | 1 | 1 | 60.00% |
 | REQ-06: Xử lý quá hạn | 5 | 3 | 1 | 1 | 60.00% |
 | REQ-07: Quản lý thành viên | 4 | 2 | 2 | 0 | 50.00% |
 | REQ-08: Tra cứu phiếu mượn | 5 | 5 | 0 | 0 | 100.00% |
-| **Tổng cộng** | **39** | **30** | **7** | **2** | **76.92%** |
+| **Tổng cộng** | **39** | **29** | **8** | **2** | **74.35%** |
