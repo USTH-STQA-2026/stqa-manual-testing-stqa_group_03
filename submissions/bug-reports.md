@@ -1,4 +1,4 @@
-# Danh sách Báo cáo lỗi (Bug Reports) - Phân hệ Quản lý thành viên (REQ-07)
+# Danh sách Báo cáo lỗi (Bug Reports) 
 
 | Thông tin      |                          |
 | -------------- | ------------------------ |
