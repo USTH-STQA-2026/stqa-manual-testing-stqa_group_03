@@ -44,8 +44,8 @@
 
 | Mức độ | Số lượng | Bug IDs                                                |
 | ------ | -------- | ------------------------------------------------------ |
-| High   | 4        | BUG-REQ03-02, BUG-REQ04-01, BUG-01, BUG-02             |
-| Medium | 4        | BUG-REQ02-01, BUG-REQ03-01, BUG-REQ05-01, BUG-REQ06-01 |
+| High   | 5        |   BUG-REQ01-01,BUG-REQ03-02,BUG-REQ04-01,BUG-REQ06-01,BUG-REQ07-01   |
+| Medium | 3        | BUG-REQ02-01,BUG-REQ03-01,BUG-REQ05-01 |
 | Low    | 0        | Không có                                               |
 
 ---
