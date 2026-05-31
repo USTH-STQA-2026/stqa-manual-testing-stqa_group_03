@@ -296,7 +296,7 @@ Bổ sung một component Modal/Dialog xác nhận (Confirm Dialog) ở tầng F
 
 ## 7. BUG-REQ06-01: Bộ lọc trạng thái "Quá hạn" hoạt động sai logic, hiển thị sai dữ liệu
 
-**Bug ID:** BUG-REQ06-01 (Tham chiếu: TC-06-03)
+**Bug ID:** BUG-07 (Tham chiếu: TC-06-03)
 
 **Tiêu đề:** Bộ lọc danh mục hoạt động sai thuật toán, hiển thị lẫn lộn cả các phiếu mượn ở trạng thái "Đã trả" khi người dùng chọn tiêu chí lọc là "Quá hạn"
 
