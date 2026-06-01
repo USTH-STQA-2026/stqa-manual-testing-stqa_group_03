@@ -52,16 +52,21 @@
 
 ## 3. Kỹ thuật thiết kế đã sử dụng
 
-| Kỹ thuật                      | Áp dụng cho REQ nào?           | Số TC sử dụng | Giải thích cách áp dụng                                                                                         |
-| ----------------------------- | ------------------------------ | ------------- | --------------------------------------------------------------------------------------------------------------- |
-| Equivalence Partitioning (EP) | REQ-01, REQ-03, REQ-07         | 12            | Phân chia dữ liệu thành các lớp hợp lệ và không hợp lệ để giảm số lượng test case nhưng vẫn đảm bảo độ bao phủ. |
-| Boundary Value Analysis (BVA) | REQ-04                         | 1             | Kiểm tra giới hạn số lượng sách được phép mượn tối đa là 3 cuốn.                                                |
-| Decision Table Testing        | REQ-04                         | 3             | Kiểm tra các tổ hợp điều kiện liên quan đến trạng thái tài khoản và quyền mượn sách.                            |
-| State Transition Testing      | REQ-05, REQ-06                 | 5             | Kiểm tra sự thay đổi trạng thái của sách và phiếu mượn trong các luồng nghiệp vụ khác nhau.                     |
-| Role-Based Testing            | REQ-02, REQ-06, REQ-07, REQ-08 | 8             | Kiểm tra quyền truy cập và chức năng theo từng vai trò người dùng.                                              |
-| Negative Testing              | Tất cả các REQ                 | 15+           | Kiểm tra phản hồi của hệ thống với dữ liệu không hợp lệ hoặc các thao tác không được phép.                      |
+| Kỹ thuật                                | Áp dụng cho REQ nào?           | Số TC sử dụng | Giải thích cách áp dụng                                                                                                                                                        |
+| --------------------------------------- | ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Equivalence Partitioning (EP)**       | REQ-01, REQ-07, REQ-08         | 10            | Phân chia dữ liệu đầu vào thành các lớp hợp lệ và không hợp lệ (email tồn tại/không tồn tại, email đúng/sai định dạng, email trùng/chưa trùng, tài khoản hợp lệ/không hợp lệ). |
+| **Boundary Value Analysis (BVA)**       | REQ-01, REQ-04                 | 2             | Kiểm tra các giá trị tại ngưỡng giới hạn như số lượng sách được mượn tối đa là 3 cuốn hoặc trường dữ liệu rỗng.                                                                |
+| **Decision Table Testing**              | REQ-04                         | 5             | Kiểm tra các tổ hợp điều kiện nghiệp vụ khi mượn sách: trạng thái thành viên, trạng thái sách và giới hạn số sách đang mượn.                                                   |
+| **State Transition Testing**            | REQ-05, REQ-06, REQ-08         | 6             | Kiểm tra sự thay đổi trạng thái của sách và phiếu mượn (Đang mượn → Đã trả → Quá hạn) cũng như trạng thái tài khoản trong các luồng nghiệp vụ.                                 |
+| **Role-Based Testing (Authorization)**  | REQ-02, REQ-06, REQ-07, REQ-08 | 8             | Kiểm tra quyền truy cập và chức năng của từng vai trò (Thủ thư và Thành viên), bao gồm hiển thị chức năng và chặn truy cập trái phép.                                          |
+| **Negative Testing**                    | REQ-01, REQ-04, REQ-05, REQ-08 | 8             | Kiểm tra phản hồi của hệ thống với dữ liệu không hợp lệ hoặc thao tác không được phép như đăng nhập sai, mượn sách không hợp lệ, truy cập trái quyền.                          |
+| **Happy Path Testing**                  | REQ-02, REQ-03, REQ-05, REQ-06 | 9             | Kiểm tra các luồng nghiệp vụ thành công khi người dùng thao tác đúng và dữ liệu đầu vào hợp lệ.                                                                                |
+| **UI / UX Testing**                     | REQ-02, REQ-05, REQ-06, REQ-08 | 6             | Kiểm tra hiển thị giao diện, cấu trúc dữ liệu, nút chức năng, trạng thái màu sắc và trải nghiệm người dùng.                                                                    |
+| **Filter / Search Testing**             | REQ-03                         | 6             | Kiểm tra chức năng tìm kiếm, lọc dữ liệu, xử lý chuỗi nhập liệu, kết hợp điều kiện tìm kiếm và reset bộ lọc.                                                                   |
+| **Real-time / Synchronization Testing** | REQ-02                         | 1             | Kiểm tra khả năng đồng bộ trạng thái dữ liệu giữa nhiều phiên làm việc mà không cần tải lại trang.                                                                             |
 
----
+
+
 
 ## 4. Phân tích chất lượng phần mềm
 
