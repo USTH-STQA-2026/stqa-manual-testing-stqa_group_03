@@ -70,22 +70,21 @@
 
 ## 4. Phân tích chất lượng phần mềm
 
-### 4.1. Điểm mạnh
+###4.1. Điểm mạnh
+*Chức năng Đăng nhập (REQ-01) hoạt động ổn định với tỷ lệ Pass 100%, xử lý chính xác các trường hợp đăng nhập hợp lệ và không hợp lệ.
+*Chức năng Tra cứu phiếu mượn (REQ-08) đáp ứng đầy đủ yêu cầu và đạt tỷ lệ Pass 100%, đảm bảo phân quyền và bảo mật dữ liệu người dùng.
+*Các nghiệp vụ chính như xem sách, mượn sách và trả sách đều hoạt động tốt trong các trường hợp sử dụng thông thường.
+*Cơ chế phân quyền giữa Thành viên và Thủ thư được triển khai tương đối chính xác, ngăn chặn truy cập trái phép vào các chức năng quản trị.
+*Giao diện hệ thống trực quan, thông tin hiển thị rõ ràng, giúp người dùng dễ dàng thao tác và theo dõi trạng thái dữ liệu.
 
-* Chức năng Đăng nhập (REQ-01) hoạt động ổn định với tỷ lệ Pass 100%.
-* Chức năng Tra cứu phiếu mượn (REQ-08) đáp ứng đầy đủ yêu cầu và đạt tỷ lệ Pass 100%.
-* Các luồng nghiệp vụ chính như xem sách, mượn sách và trả sách đều có thể thực hiện thành công trong điều kiện bình thường.
-* Cơ chế phân quyền giữa Thành viên và Thủ thư được triển khai tương đối chính xác.
-* Giao diện hệ thống dễ sử dụng, thông tin hiển thị rõ ràng và nhất quán.
-
-### 4.2. Điểm yếu
-
-* Chức năng Quản lý thành viên (REQ-07) tồn tại lỗi nghiêm trọng trong kiểm tra định dạng email, vừa từ chối email hợp lệ vừa chấp nhận email không hợp lệ.
-* Chức năng Tìm kiếm & Lọc sách (REQ-03) xử lý chưa chính xác khi kết hợp nhiều điều kiện tìm kiếm và lọc.
-* Chức năng Mượn sách (REQ-04) không giới hạn số lượng sách được phép mượn theo yêu cầu nghiệp vụ.
-* Chức năng Trả sách (REQ-05) thiếu bước xác nhận trước khi thực hiện hành động cập nhật dữ liệu.
-* Bộ lọc phiếu quá hạn (REQ-06) hiển thị dữ liệu không chính xác.
-* Một số trường hợp kiểm thử không thể thực hiện do hạn chế về dữ liệu và môi trường kiểm thử.
+###4.2. Điểm yếu
+*Chức năng Quản lý thành viên (REQ-07) tồn tại lỗi nghiêm trọng trong kiểm tra định dạng email, vừa từ chối email hợp lệ vừa chấp nhận email không hợp lệ.
+*Chức năng Tìm kiếm & Lọc sách (REQ-03) xử lý chưa chính xác khi tìm kiếm với khoảng trắng thừa và khi kết hợp nhiều điều kiện lọc.
+*Chức năng Mượn sách (REQ-04) không giới hạn số lượng sách được phép mượn theo yêu cầu nghiệp vụ, cho phép mượn vượt quá 3 cuốn.
+*Chức năng Trả sách (REQ-05) thiếu hộp thoại xác nhận trước khi thực hiện trả sách, làm tăng nguy cơ thao tác nhầm.
+*Bộ lọc phiếu quá hạn (REQ-06) hiển thị dữ liệu chưa chính xác, còn lẫn các phiếu không thuộc trạng thái quá hạn.
+*Một số trường hợp kiểm thử bị Blocked do hạn chế dữ liệu và môi trường kiểm thử, chưa thể đánh giá đầy đủ tất cả các kịch bản nghiệp vụ.
+*Với tỷ lệ Pass 74.35%, hệ thống đã đáp ứng được phần lớn yêu cầu chức năng nhưng vẫn cần khắc phục các lỗi nghiệp vụ và validation trước khi đưa vào sử dụng chính thức.
 
 ---
 
