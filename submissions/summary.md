@@ -103,8 +103,8 @@
 | Thứ tự | Bug          | Mức độ | Lý do ưu tiên                                                                                        |
 | ------ | ------------ | ------ | ---------------------------------------------------------------------------------------------------- |
 | 1      | BUG-REQ04-01 | High   | Vi phạm quy tắc nghiệp vụ quan trọng khi cho phép mượn vượt quá giới hạn quy định.                   |
-| 2      | BUG-02       | High   | Chấp nhận email sai định dạng, làm giảm chất lượng dữ liệu và ảnh hưởng đến các chức năng liên quan. |
-| 3      | BUG-01       | High   | Từ chối email hợp lệ, ảnh hưởng trực tiếp đến việc quản lý thành viên.                               |
+| 2      | BUG-REQ07-01 | High   | Chấp nhận email sai định dạng, làm giảm chất lượng dữ liệu và ảnh hưởng đến các chức năng liên quan. |
+| 3      | BUG-REQ06-01 | High   | Bộ lọc danh mục hoạt động sai thuật toán, hiển thị lẫn lộn cả các phiếu mượn ở các trạng thái        |
 | 4      | BUG-REQ03-02 | High   | Logic tìm kiếm và lọc hoạt động sai, trả về kết quả không chính xác cho người dùng.                  |
 | 5      | BUG-REQ06-01 | Medium | Bộ lọc quá hạn hiển thị sai dữ liệu, ảnh hưởng đến khả năng quản lý phiếu mượn.                      |
 | 6      | BUG-REQ03-01 | Medium | Không xử lý khoảng trắng dư thừa trong từ khóa tìm kiếm.                                             |
