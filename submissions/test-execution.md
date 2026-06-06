@@ -1,38 +1,84 @@
-# Test Execution — Kết quả thực thi kiểm thử
+# Test Execution — Test Execution Results
 
-> **Hướng dẫn**: Chạy từng TC trên hệ thống https://stqa.rbc.vn, ghi lại kết quả thực tế.
-> Kết luận: **Pass** (kết quả đúng), **Fail** (kết quả sai → tạo bug report), **Blocked** (không thực hiện được vì lỗi khác chặn), **Not Run** (chưa chạy).
+> **Instructions**: Execute each test case on the system https://stqa.rbc.vn and record the actual results.
+> Conclusion: **Pass** (expected result achieved), **Fail** (incorrect result → create a bug report), **Blocked** (cannot be executed due to another blocking issue), **Not Run** (not executed yet).
 
-| Thông tin | |
-|---|---|
-| **Nhóm** | `<!-- Tên nhóm -->` |
-| **Ngày thực thi** | `<!-- DD/MM/YYYY -->` |
-| **Trình duyệt** | Chrome `<!-- version -->` |
-| **Hệ điều hành** | `<!-- Windows / macOS / Linux -->` |
-
----
-
-## Kết quả chi tiết
-
-| Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
-|-------|---------------|---------------------------|-----------------|---------|-----------|----| 
-| | | | | | | |
+| Information | |
+| ----------- | ---------------------------------- |
+| **Group** | STQA-03 Group |
+| **Execution Date** | 23/05/2026 |
+| **Browser** | Chrome Version 125.0.0 |
+| **Operating System** | Windows / macOS |
 
 ---
 
-## Tổng hợp kết quả
+## Detailed Results
 
-| Chỉ số | Giá trị |
-|--------|---------|
-| Tổng số test case | `<!-- số -->` |
-| Pass | `<!-- số -->` |
-| Fail | `<!-- số -->` |
-| Blocked | `<!-- số -->` |
-| Not Run | `<!-- số -->` |
-| **Tỷ lệ Pass** | `<!-- xx% -->` |
+| TC ID | Functional Area | Expected Result (Summary) | Actual Result | Conclusion | Evidence | Bug |
+| ----- | --------------- | ------------------------- | ------------- | ---------- | -------- | --- |
+| **TC-01-01** | REQ-01: Login | Successfully log in with a valid email and password, then navigate to the home page. | The system successfully logs in and redirects to the home page. The AppBar correctly displays the user's name and role. | **Pass** | <img width="3806" height="1999" alt="image" src="https://github.com/user-attachments/assets/a4269639-d797-46d1-9c71-c7be024383e8" /> | None |
+| **TC-01-02** | REQ-01: Login | Reject login with an incorrect password and display the message "Incorrect password". | The system rejects the login attempt and correctly displays the password error message. | **Pass** | <img width="3807" height="1986" alt="image" src="https://github.com/user-attachments/assets/9f19f539-5d65-4109-b149-e5008436d733" /> | None |
+| **TC-01-03** | REQ-01: Login | Reject login with a non-existing email address and display the message "Member not found". | The system rejects the login attempt and accurately displays the account-not-found error message. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/9d9844d2-0b26-467d-a913-878c42d27e4e" /> | None |
+| **TC-01-04** | REQ-01: Login | Display the message "Please enter your email and password" when required fields are left blank. | The correct validation message is displayed, and no request is sent to the server. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/12316d9b-c372-4f52-9365-46818b36d5c5" /> | None |
+| **TC-01-05** | REQ-01: Login | Reject processing when the email format is invalid (missing `@` or `.`). | The UI blocks the login attempt and displays an invalid email format error message. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/43dd8012-8272-4ece-8608-e766005f7f5e" /> | None |
+| **TC-02-01** | REQ-02: View Book List | Book cards clearly display all 5 required information fields according to the SRS. | Each book card clearly displays all 5 mandatory fields: Book Title, Author, Category, Publication Year, and Status. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/84c2db73-ca4b-484f-bea4-ff38c27a0e29" /> | None |
+| **TC-02-02** | REQ-02: View Book List | A Member account can view the book list through a user-friendly interface. | The book list is displayed normally with a clean and user-friendly interface optimized for searching and borrowing books. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/d2ed86a7-6ee1-4c98-925b-bb0abc15e0a4" /> | None |
+| **TC-02-03** | REQ-02: View Book List | A Librarian account can view the book list along with administrative functions. | The book list is fully displayed with additional management tools and administrative functions available only to Librarians. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/f5967d62-6d50-449e-94c9-bf82b87f68c1" /> | None |
+| **TC-02-04** | REQ-02: View Book List | Book status is automatically synchronized and updated in real time. | Status changes are instantly reflected across other active sessions without requiring a page refresh. | **Fail** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/8be038d9-7813-434a-913f-9ebbbebf0dde" /> | BUG-02 |
+| **TC-03-01** | REQ-03: Search & Filter Books | Searching with the lowercase keyword `"flutter"` returns the correct related book. | The system correctly filters and displays the matching book **"Flutter Programming Basics"** on the screen. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/092ff503-1eca-4ff4-b3db-2031a949cb38" /> | None |
+| **TC-03-02** | REQ-03: Search & Filter Books | The system performs a case-insensitive search, returning the same result for `"FLUTTER"` as for lowercase input. | The system handles case-insensitive searches correctly and returns the book **"Flutter Programming Basics"**. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/1e111118-81e4-4c11-a360-dd7a0b68162d" /> | None |
+| **TC-03-03** | REQ-03 Search Books | Searching with a keyword containing leading and trailing spaces still returns the correct book. | Instead of displaying "No books found", the system incorrectly shows the entire default book catalog. | **Fail** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/9fcdcd4d-fb61-4cff-afe1-6ef438e7d2b5" /> | BUG-03 |
+| **TC-03-04** | REQ-03: Search & Filter Books | Applying the `"Technology"` category filter displays only books belonging to the Technology category. | The filter works correctly; the displayed list is narrowed accurately without including books from other categories. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/ba5c2f42-a206-49cf-9f3c-183c21b669a4" /> | None |
+| **TC-03-05** | REQ-03 Search & Filter | Filter by `"Economics"` and search for `"Flutter"` simultaneously (AND logic). | The search box overrides and completely ignores the currently selected category filter. | **Fail** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/4c1da7d1-804c-4fdc-a393-f04ace1ed5da" /> | BUG-04 |
+| **TC-03-06** | REQ-03: Search & Filter Books | Clearing the keyword or removing the filter restores the default book list. | The search box becomes empty, filters are cleared, and the system automatically reloads the complete default book list. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/f1e562c2-4146-421b-9c92-954295c87788" /> | None |
+| **TC-04-01** | REQ-04: Borrow Books | A member successfully borrows a book, the status changes to "Borrowed", and the system automatically creates a new borrowing record. | The borrowing process succeeds. The system displays a success Toast notification, changes the book status label to orange **"Borrowed"**, and creates a new borrowing record. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/e1115c5b-21d9-4b49-8bb7-2079a91970c5" /> | None |
+| **TC-04-02** | REQ-04: Borrow Books | The system blocks borrowing actions for accounts with the **Blocked** status. | The system correctly identifies the account status, prevents borrowing, and displays an error Dialog indicating the account is blocked. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/ba24747f-1bb2-4cc1-8c1f-3914d277c269" /> | None |
+| **TC-04-03** | REQ-04: Borrow Books | The system blocks borrowing actions for accounts with the **Expired** status. | The system successfully prevents borrowing and displays an error Dialog indicating that the account has expired. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/f0f2aa9b-7cca-46b1-beba-73cb50b496bc" /> | None |
+| **TC-04-04** | REQ-04: Borrow Books | The system prevents borrowing a fourth book and beyond (maximum limit: 3 books). | The system does not enforce the borrowing limit and still allows the account to successfully borrow the 4th and 5th books without displaying any error message. | **Fail** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/fee08e19-6c80-4b5c-9958-947d2b3d376d" /> | BUG-05 |
+| **TC-04-05** | REQ-04: Borrow Books | The Borrow button is disabled for books that are already borrowed or marked as lost. | The **"Borrow Book"** button for borrowed books is automatically grayed out (disabled) and completely blocks user interaction. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/e72e8bd0-b19d-48a6-b021-268709466d4a" /> | None |
+| **TC-05-01** | REQ-05: Return Books | Member successfully returns a book on time, the book status changes to "Available" and no overdue warning is displayed. | The book was returned successfully. The system displayed a success Toast notification, the book status label immediately changed to green "Available", and no warning message appeared. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/e71c29c8-514a-47df-b23f-500b192ea361" /> | None |
+| **TC-05-02** | REQ-05: Return Books | Member successfully returns an overdue book, and the system records and displays an overdue penalty warning. | No overdue borrowing record existed in the test environment to execute this scenario (Insufficient test data). | **Blocked** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/c0b24d9e-9286-4763-be45-0960dcda1c26" /> | None |
+| **TC-05-03** | REQ-05: Return Books | The system automatically hides the "Return Book" button for borrowing records that have already been returned. | The UI completely hid the "Return Book" button for returned borrowing records, successfully preventing users from performing the action again. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/d7af7845-0daa-4078-9d08-0bcf7cf7caba" /> | None |
+| **TC-05-04** | REQ-05: Return Books | The system automatically redirects users to the Login screen when the session expires. | The system validated the session and successfully redirected the user to the Login page when attempting to return a book after session expiration. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/6094dcca-923b-4bdf-8e5e-835e1a7357d9" /> | None |
+| **TC-05-05** | REQ-05: Return Books | When the user selects Cancel in the confirmation popup, the process is aborted and the borrowing record status remains unchanged. | The system immediately triggered the return API when the button was clicked and did not display any confirmation dialog (Popup/Modal) for the user to cancel the action. | **Fail** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/099d5830-ef95-457d-b480-ccd20eff7afe" /> | BUG-06 |
+| **TC-06-01** | REQ-06: Overdue Processing | The system automatically scans and updates overdue borrowing records (including record `BR001`) to "Overdue". | The automatic scanning process (Cron Job) worked correctly and successfully updated the status labels of overdue records (including `BR001`). | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/43a20910-9640-4b6a-a0c3-d959c80ac107" /> | None |
+| **TC-06-02** | REQ-06: Overdue Processing | The system displays "0 overdue records" and keeps the data unchanged when no members have overdue books. | The test environment database always contained existing overdue records, making it impossible to completely clean the dataset and execute this test case. | **Blocked** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/81fc8f67-47fa-4a3f-a0dc-96c9b6e20586" /> | None |
+| **TC-06-03** | REQ-06: Overdue Processing | When the Librarian selects the "Overdue" filter, the management screen should display only overdue borrowing records. | The filter logic worked incorrectly, displaying a mixture of "Overdue" records and completed ("Returned") records. | **Fail** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/7962329f-5ef6-4d9e-892d-23693e8c5c13" /> | BUG-07 |
+| **TC-06-04** | REQ-06: Overdue Processing | Members can clearly view their own overdue borrowing records (e.g., red label or bold text). | Overdue records were displayed clearly with a red "Overdue" warning label on the member’s personal interface. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/188a900f-448e-4622-a3fe-aac08e6533df" /> | None |
+| **TC-06-05** | REQ-06: Overdue Processing | Members do not have permission to access overdue management features; direct URL access should be blocked. | The feature button was completely hidden on the UI. When users manually entered the administration URL, the system automatically denied access and redirected them to the Login page. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/ff307e98-63dc-4b15-86d2-d25894dccbac" /> | None |
+| **TC-07-01** | REQ-07: Member Management | The Librarian successfully adds a new member using a valid email address (`binh.ly@email.com`). | The system rejected the creation request and displayed the red error message "Invalid email" even though the email format was completely valid. | **Fail** | <img width="2880" height="1704" alt="image" src="https://github.com/user-attachments/assets/163cbe87-bf2c-4621-a9c1-3108c98a9bc9" /> | BUG-01 |
+| **TC-07-02** | REQ-07: Member Management | The system blocks member creation and displays an error when an invalid email format (`loi.vu@email`) is entered. | The system failed to validate the email format, still accepted the data, and displayed a successful member creation message. | **Fail** | <img width="2880" height="1704" alt="image" src="https://github.com/user-attachments/assets/6d922d53-f781-41ed-89b3-757d620c1470" /> | BUG-08 |
+| **TC-07-03** | REQ-07: Member Management | The system blocks member creation when an existing email (`ba.nguyen@email.com`) is entered. | The system rejected the creation request and correctly displayed the message "Email already exists". | **Pass** | <img width="2880" height="1704" alt="image" src="https://github.com/user-attachments/assets/8a9c20cb-8faa-42de-889e-d3cae2dcd002" /> | None |
+| **TC-07-04** | REQ-07: Member Management | Regular members do not have access to the Add Member feature, and direct URL access is blocked. | The Add Member button was hidden. When a user manually entered the URL, the system automatically redirected them to the main page and denied access. | **Pass** | <img width="2880" height="1704" alt="image" src="https://github.com/user-attachments/assets/39f90671-3216-45a4-a063-c8b5f02d39f2" /> | None |
+| **TC-08-01** | REQ-08: Borrowing Record Lookup | Log in with the Member account (`dam.tran@email.com`). The system should display only the two personal borrowing records (`BR002`, `BR005`). | The Member account logged in successfully. The interface displayed the correct structure and showed only the two personalized borrowing records: BR002 and BR005. | **Pass** | <img width="2554" height="1393" alt="image" src="https://github.com/user-attachments/assets/ead0d1dd-60f1-4b46-b9ca-c33ee3686fa6" /> | None |
+| **TC-08-02** | REQ-08: Borrowing Record Lookup | Log in with the Librarian account and verify that all 5 records are displayed. Click the overdue scan button; records `BR001` and `BR003` should change to red "Overdue" status and a SnackBar notification should appear. | The system displayed all 5 borrowing records from all members. After clicking the scan button, BR001 and BR003 changed to red status, and a SnackBar message appeared: "Updated: 2 overdue borrowing records." | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/9ff5da0d-7b85-4354-bc79-a0eae129a9ef" /> | None |
+| **TC-08-03** | REQ-08: Borrowing Record Lookup | The borrowing record card (e.g., `BR003`) displays all 5 required information fields, with proper formatting and a clear status label. | The information card was displayed clearly without font or layout issues. It contained the borrowing ID, book title, borrower name, date pair, and a clear status label. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/c74a1b75-b772-454b-be45-956532dc6dca" /> | None |
+| **TC-08-04** | REQ-08: Borrowing Record Lookup | Invalid login credentials should be rejected, completely preventing access to the borrowing record lookup module. | The system displayed a login error, remained on the login screen, and protected borrowing record information from unauthorized access. | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/475b6a07-c620-45f8-b82b-a511959163a6" /> | None |
+| **TC-08-05** | REQ-08: Borrowing Record Lookup | Log in with a Suspended/Expired account that has no borrowing records. The system should display the empty-state message: "No borrowing records found." | The interface did not display other users' records. The system handled authorization correctly and showed an empty screen with the message: "No borrowing records found." | **Pass** | <img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/ee1959c0-cd7e-4cdc-b2ac-cfdcb7a363fd" /> | None |
 
-### Kết quả theo nhóm chức năng
+---
 
-| Nhóm | Tổng TC | Pass | Fail | Tỷ lệ Pass |
-|------|---------|------|------|------------|
-| | | | | |
+## Summary of Results
+
+| Metric | Value |
+|----------|---------|
+| Total Test Cases | **39** |
+| Passed | **29** |
+| Failed | **8** |
+| Blocked | **2** |
+| Not Run | **0** |
+| **Pass Rate** | **74.35%** |
+
+### Results by Functional Area
+
+| Functional Area | Total TC | Pass | Fail | Blocked | Pass Rate |
+|----------------|---------:|-----:|-----:|---------:|----------:|
+| REQ-01: Login | 5 | 5 | 0 | 0 | 100.00% |
+| REQ-02: View Book List | 4 | 3 | 1 | 0 | 75.00% |
+| REQ-03: Search & Filter Books | 6 | 4 | 2 | 0 | 66.67% |
+| REQ-04: Borrow Books | 5 | 4 | 1 | 0 | 80.00% |
+| REQ-05: Return Books | 5 | 3 | 1 | 1 | 60.00% |
+| REQ-06: Overdue Processing | 5 | 3 | 1 | 1 | 60.00% |
+| REQ-07: Member Management | 4 | 2 | 2 | 0 | 50.00% |
+| REQ-08: Borrowing Record Lookup | 5 | 5 | 0 | 0 | 100.00% |
+| **Total** | **39** | **29** | **8** | **2** | **74.35%** |
