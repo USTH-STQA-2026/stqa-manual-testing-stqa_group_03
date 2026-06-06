@@ -1,139 +1,132 @@
-# Test Summary — Báo cáo tổng hợp kiểm thử
+# Test Summary — Test Summary Report
 
-> Đây là hoạt động Quality Assurance nhằm đánh giá chất lượng tổng thể của hệ thống Quản lý Thư viện dựa trên kết quả kiểm thử, mức độ đáp ứng yêu cầu nghiệp vụ và mức độ ảnh hưởng của các lỗi được phát hiện.
+> This is a Quality Assurance activity aimed at evaluating the overall quality of the Library Management system based on test results, business requirement compliance, and the impact level of the detected defects.
 
 ---
 
-## 1. Thông tin nhóm
+## 1. Team Information
 
-| Mục                   | Thông tin                  |
+| Item                  | Information                |
 | --------------------- | -------------------------- |
-| **Nhóm**              | STQA-03                    |
-| **Lớp**               | STQA                       |
-| **Ngày báo cáo**      | 23/05/2026                 |
-| **Hệ thống kiểm thử** | https://stqa.rbc.vn — v1.0 |
+| **Team**              | STQA-03                    |
+| **Class**             | STQA                       |
+| **Report Date**       | 23/05/2026                 |
+| **System Under Test** | https://stqa.rbc.vn — v1.0 |
 
 ---
 
-## 2. Tổng quan kết quả
+## 2. Results Overview
 
-| Chỉ số               | Giá trị |
-| -------------------- | ------- |
-| Tổng số test case    | 39      |
-| Pass                 | 29      |
-| Fail                 | 8       |
-| Blocked              | 2       |
-| Not Run              | 0       |
-| **Tỷ lệ Pass**       | 74.35%  |
-| **Số bug phát hiện** | 8       |
+| Metric                     | Value   |
+| -------------------------- | ------- |
+| Total Test Cases           | 39      |
+| Pass                       | 29      |
+| Fail                       | 8       |
+| Blocked                    | 2       |
+| Not Run                    | 0       |
+| **Pass Rate**              | 74.35%  |
+| **Number of Detected Bugs**| 8       |
 
-### Phân bổ theo nhóm chức năng
+### Distribution by Functional Group
 
-| Nhóm chức năng              | TC | Pass | Fail | Bug | Đánh giá      |
-| --------------------------- | -- | ---- | ---- | --- | ------------- |
-| REQ-01: Đăng nhập           | 5  | 5    | 0    | 0   | Tốt           |
-| REQ-02: Xem danh sách sách  | 4  | 3    | 1    | 1   | Khá           |
-| REQ-03: Tìm kiếm & Lọc sách | 6  | 4    | 2    | 2   | Cần cải thiện |
-| REQ-04: Mượn sách           | 5  | 4    | 1    | 1   | Cần cải thiện |
-| REQ-05: Trả sách            | 5  | 3    | 1    | 1   | Trung bình    |
-| REQ-06: Xử lý quá hạn       | 5  | 3    | 1    | 1   | Trung bình    |
-| REQ-07: Quản lý thành viên  | 4  | 2    | 2    | 2   | Yếu           |
-| REQ-08: Tra cứu phiếu mượn  | 5  | 5    | 0    | 0   | Tốt           |
+| Functional Group               | TC | Pass | Fail | Bug | Evaluation        |
+| ------------------------------ | -- | ---- | ---- | --- | ----------------- |
+| REQ-01: Login                  | 5  | 5    | 0    | 0   | Good              |
+| REQ-02: View Book List         | 4  | 3    | 1    | 1   | Fairly Good       |
+| REQ-03: Search & Filter Books  | 6  | 4    | 2    | 2   | Needs Improvement |
+| REQ-04: Borrow Books           | 5  | 4    | 1    | 1   | Needs Improvement |
+| REQ-05: Return Books           | 5  | 3    | 1    | 1   | Average           |
+| REQ-06: Overdue Processing     | 5  | 3    | 1    | 1   | Average           |
+| REQ-07: Member Management      | 4  | 2    | 2    | 2   | Poor              |
+| REQ-08: Look up Borrowing Slips| 5  | 5    | 0    | 0   | Good              |
 
-### Phân bổ bug theo mức độ
+### Bug Distribution by Severity
 
-| Mức độ | Số lượng | Bug IDs                                                |
-| ------ | -------- | ------------------------------------------------------ |
-| High   | 5        |   BUG-REQ01-01,BUG-REQ03-02,BUG-REQ04-01,BUG-REQ06-01,BUG-REQ07-01   |
-| Medium | 3        | BUG-REQ02-01,BUG-REQ03-01,BUG-REQ05-01 |
-| Low    | 0        | Không có                                               |
-
----
-
-## 3. Kỹ thuật thiết kế đã sử dụng
-
-| Kỹ thuật                                | Áp dụng cho REQ nào?           | Số TC sử dụng | Giải thích cách áp dụng                                                                                                                                                        |
-| --------------------------------------- | ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Equivalence Partitioning (EP)**       | REQ-01, REQ-07, REQ-08         | 10            | Phân chia dữ liệu đầu vào thành các lớp hợp lệ và không hợp lệ (email tồn tại/không tồn tại, email đúng/sai định dạng, email trùng/chưa trùng, tài khoản hợp lệ/không hợp lệ). |
-| **Boundary Value Analysis (BVA)**       | REQ-01, REQ-04                 | 2             | Kiểm tra các giá trị tại ngưỡng giới hạn như số lượng sách được mượn tối đa là 3 cuốn hoặc trường dữ liệu rỗng.                                                                |
-| **Decision Table Testing**              | REQ-04                         | 5             | Kiểm tra các tổ hợp điều kiện nghiệp vụ khi mượn sách: trạng thái thành viên, trạng thái sách và giới hạn số sách đang mượn.                                                   |
-| **State Transition Testing**            | REQ-05, REQ-06, REQ-08         | 6             | Kiểm tra sự thay đổi trạng thái của sách và phiếu mượn (Đang mượn → Đã trả → Quá hạn) cũng như trạng thái tài khoản trong các luồng nghiệp vụ.                                 |
-| **Role-Based Testing (Authorization)**  | REQ-02, REQ-06, REQ-07, REQ-08 | 8             | Kiểm tra quyền truy cập và chức năng của từng vai trò (Thủ thư và Thành viên), bao gồm hiển thị chức năng và chặn truy cập trái phép.                                          |
-| **Negative Testing**                    | REQ-01, REQ-04, REQ-05, REQ-08 | 8             | Kiểm tra phản hồi của hệ thống với dữ liệu không hợp lệ hoặc thao tác không được phép như đăng nhập sai, mượn sách không hợp lệ, truy cập trái quyền.                          |
-| **Happy Path Testing**                  | REQ-02, REQ-03, REQ-05, REQ-06 | 9             | Kiểm tra các luồng nghiệp vụ thành công khi người dùng thao tác đúng và dữ liệu đầu vào hợp lệ.                                                                                |
-| **UI / UX Testing**                     | REQ-02, REQ-05, REQ-06, REQ-08 | 6             | Kiểm tra hiển thị giao diện, cấu trúc dữ liệu, nút chức năng, trạng thái màu sắc và trải nghiệm người dùng.                                                                    |
-| **Filter / Search Testing**             | REQ-03                         | 6             | Kiểm tra chức năng tìm kiếm, lọc dữ liệu, xử lý chuỗi nhập liệu, kết hợp điều kiện tìm kiếm và reset bộ lọc.                                                                   |
-| **Real-time / Synchronization Testing** | REQ-02                         | 1             | Kiểm tra khả năng đồng bộ trạng thái dữ liệu giữa nhiều phiên làm việc mà không cần tải lại trang.                                                                             |
-
-
-
-
-## 4. Phân tích chất lượng phần mềm
-
-### 4.1. Điểm mạnh
-
-* Chức năng **Đăng nhập (REQ-01)** hoạt động ổn định và đạt tỷ lệ Pass **100%**, xử lý chính xác các trường hợp đăng nhập hợp lệ và không hợp lệ.
-* Chức năng **Tra cứu phiếu mượn (REQ-08)** đáp ứng đầy đủ yêu cầu đặc tả và đạt tỷ lệ Pass **100%**, đảm bảo phân quyền và bảo mật dữ liệu người dùng.
-* Các nghiệp vụ chính như **xem danh sách sách, mượn sách và trả sách** đều hoạt động tốt trong các trường hợp sử dụng thông thường.
-* Cơ chế **phân quyền giữa Thành viên và Thủ thư** được triển khai tương đối chính xác, hạn chế hiệu quả các truy cập trái phép.
-* Giao diện hệ thống trực quan, thông tin được trình bày rõ ràng và nhất quán, hỗ trợ người dùng thao tác dễ dàng.
-
-### 4.2. Điểm yếu
-
-* Chức năng **Quản lý thành viên (REQ-07)** tồn tại lỗi nghiêm trọng trong kiểm tra định dạng email, vừa từ chối email hợp lệ vừa chấp nhận email không hợp lệ.
-
-* Chức năng **Tìm kiếm & Lọc sách (REQ-03)** xử lý chưa chính xác trong một số trường hợp như tìm kiếm có khoảng trắng thừa hoặc kết hợp nhiều điều kiện lọc.
-
-* Chức năng **Mượn sách (REQ-04)** chưa áp dụng đúng quy tắc giới hạn số lượng sách được phép mượn, cho phép người dùng mượn vượt quá mức quy định.
-
-* Chức năng **Trả sách (REQ-05)** thiếu bước xác nhận trước khi cập nhật dữ liệu, làm tăng nguy cơ thao tác nhầm từ phía người dùng.
-
-* Chức năng **Xử lý quá hạn (REQ-06)** còn lỗi ở bộ lọc dữ liệu khi hiển thị lẫn các phiếu không thuộc trạng thái quá hạn.
-
-* Một số trường hợp kiểm thử bị **Blocked** do hạn chế dữ liệu và môi trường kiểm thử, chưa thể đánh giá đầy đủ toàn bộ các kịch bản nghiệp vụ.
-
-* Với tỷ lệ Pass **74.35%**, hệ thống đã đáp ứng được phần lớn yêu cầu chức năng, tuy nhiên vẫn cần khắc phục các lỗi nghiệp vụ và lỗi kiểm tra dữ liệu trước khi triển khai chính thức.
+| Severity | Quantity | Bug IDs                                                          |
+| -------- | -------- | ---------------------------------------------------------------- |
+| High     | 5        | BUG-REQ01-01, BUG-REQ03-02, BUG-REQ04-01, BUG-REQ06-01, BUG-REQ07-01 |
+| Medium   | 3        | BUG-REQ02-01, BUG-REQ03-01, BUG-REQ05-01                         |
+| Low      | 0        | None                                                             |
 
 ---
 
-## 5. Đề xuất ưu tiên sửa lỗi
+## 3. Test Design Techniques Used
 
-> Tiêu chí ưu tiên được xác định dựa trên mức độ ảnh hưởng đến nghiệp vụ cốt lõi của hệ thống và mức độ nghiêm trọng của lỗi.
-
-| Thứ tự | Bug          | Mức độ | Lý do ưu tiên                                                                                        |
-| ------ | ------------ | ------ | ---------------------------------------------------------------------------------------------------- |
-| 1      | BUG-REQ04-01 | High   | Vi phạm quy tắc nghiệp vụ quan trọng khi cho phép mượn vượt quá giới hạn quy định.                   |
-| 2      | BUG-REQ07-01 | High   | Chấp nhận email sai định dạng, làm giảm chất lượng dữ liệu và ảnh hưởng đến các chức năng liên quan. |
-| 3      | BUG-REQ06-01 | High   | Bộ lọc danh mục hoạt động sai thuật toán, hiển thị lẫn lộn cả các phiếu mượn ở các trạng thái        |
-| 4      | BUG-REQ03-02 | High   | Logic tìm kiếm và lọc hoạt động sai, trả về kết quả không chính xác cho người dùng.                  |
-| 5      | BUG-REQ06-01 | Medium | Bộ lọc quá hạn hiển thị sai dữ liệu, ảnh hưởng đến khả năng quản lý phiếu mượn.                      |
-| 6      | BUG-REQ03-01 | Medium | Không xử lý khoảng trắng dư thừa trong từ khóa tìm kiếm.                                             |
-| 7      | BUG-REQ05-01 | Medium | Thiếu cơ chế xác nhận trước khi trả sách, dễ gây thao tác nhầm.                                      |
-| 8      | BUG-REQ02-01 | Medium | Trạng thái sách không đồng bộ tức thời giữa các phiên làm việc.                                      |
-
----
-
-## 6. Kết luận
-
-Qua quá trình thực hiện 39 test case, hệ thống đạt tỷ lệ Pass 74.35%, phát hiện tổng cộng 8 lỗi và có 2 trường hợp Blocked do thiếu dữ liệu kiểm thử.
-
-Kết quả cho thấy các chức năng cơ bản của hệ thống đã hoạt động tương đối ổn định, đặc biệt là chức năng Đăng nhập và Tra cứu phiếu mượn. Tuy nhiên, hệ thống vẫn tồn tại nhiều lỗi ảnh hưởng trực tiếp đến nghiệp vụ chính như giới hạn mượn sách, quản lý thành viên và xử lý tìm kiếm dữ liệu.
-
-Với các lỗi mức High hiện tại, nhóm đánh giá hệ thống chưa đáp ứng điều kiện phát hành chính thức. Cần ưu tiên khắc phục các lỗi nghiêm trọng, thực hiện kiểm thử hồi quy và xác nhận lại toàn bộ các chức năng liên quan trước khi triển khai lên môi trường Production.
+| Technique                               | Applied to Which REQ?          | Number of TCs Used | Application Explanation                                                                                                                                                        |
+| --------------------------------------- | ------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Equivalence Partitioning (EP)**       | REQ-01, REQ-07, REQ-08         | 10                 | Divides input data into valid and invalid classes (existing/non-existing email, correct/incorrect email format, duplicate/unique email, valid/invalid account).                |
+| **Boundary Value Analysis (BVA)**       | REQ-01, REQ-04                 | 2                  | Tests boundary values such as the maximum limit of 3 borrowed books or empty data fields.                                                                                      |
+| **Decision Table Testing**              | REQ-04                         | 5                  | Tests combinations of business conditions when borrowing books: member status, book status, and the limit of currently borrowed books.                                         |
+| **State Transition Testing**            | REQ-05, REQ-06, REQ-08         | 6                  | Tests state changes of books and borrowing slips (Borrowing → Returned → Overdue) as well as account statuses within business workflows.                                       |
+| **Role-Based Testing (Authorization)**  | REQ-02, REQ-06, REQ-07, REQ-08 | 8                  | Tests access control and functionalities of each role (Librarian and Member), including feature visibility and blocking unauthorized access.                                  |
+| **Negative Testing**                    | REQ-01, REQ-04, REQ-05, REQ-08 | 8                  | Tests system responses to invalid data or unauthorized actions, such as incorrect logins, invalid book borrowing, and cross-privilege access.                                  |
+| **Happy Path Testing**                  | REQ-02, REQ-03, REQ-05, REQ-06 | 9                  | Tests successful business workflows when users perform correct actions with valid input data.                                                                                  |
+| **UI / UX Testing**                     | REQ-02, REQ-05, REQ-06, REQ-08 | 6                  | Tests UI display, data structure, functional buttons, color coding/statuses, and user experience.                                                                              |
+| **Filter / Search Testing**             | REQ-03                         | 6                  | Tests search and data filtering functionalities, string input processing, combining search criteria, and resetting filters.                                                    |
+| **Real-time / Synchronization Testing** | REQ-02                         | 1                  | Tests data status synchronization capabilities across multiple user sessions without page reloads.                                                                             |
 
 ---
 
-## 7. Bài học rút ra
+## 4. Software Quality Analysis
 
-* Việc xây dựng Input Domain Model (IDM) trước khi thiết kế Test Case giúp xác định đầy đủ các lớp dữ liệu cần kiểm thử.
-* Các lỗi nghiêm trọng thường tập trung ở phần xử lý nghiệp vụ hơn là giao diện người dùng.
-* Chất lượng dữ liệu kiểm thử ảnh hưởng trực tiếp đến khả năng thực hiện đầy đủ các kịch bản kiểm thử.
-* Việc duy trì mối liên kết giữa Requirement, Test Case, Test Execution và Bug Report giúp nâng cao khả năng truy vết và quản lý chất lượng.
+### 4.1. Strengths
+
+* The **Login (REQ-01)** function operates stably with a **100%** Pass rate, accurately handling valid and invalid login scenarios.
+* The **Look up Borrowing Slips (REQ-08)** function fully meets specification requirements with a **100%** Pass rate, ensuring role authorization and user data security.
+* Core business processes such as **viewing book lists, borrowing books, and returning books** all perform well under normal usage scenarios.
+* The **role authorization mechanism between Member and Librarian** is deployed relatively accurately, effectively restricting unauthorized access.
+* The system interface is intuitive, with information clearly and consistently presented, facilitating easy user operations.
+
+### 4.2. Weaknesses
+
+* The **Member Management (REQ-07)** function contains critical defects in email format validation, both rejecting valid emails and accepting invalid ones.
+* The **Search & Filter Books (REQ-03)** function handles incorrectly in certain scenarios, such as searching with extra whitespaces or combining multiple filtering conditions.
+* The **Borrow Books (REQ-04)** function fails to properly apply borrowing quantity limit rules, allowing users to exceed the specified limits.
+* The **Return Books (REQ-05)** function lacks a confirmation step prior to data updates, increasing the risk of accidental operations by users.
+* The **Overdue Processing (REQ-06)** function still contains defects in data filtering, as it displays slips that do not belong to the overdue state.
+* Certain test cases were **Blocked** due to data and test environment limitations, making it impossible to fully evaluate all business scenarios.
+* With a Pass rate of **74.35%**, the system meets most functional requirements; however, business logic and data validation defects must be resolved prior to official deployment.
 
 ---
 
-## 8. Khai báo sử dụng AI
+## 5. Bug Fixing Priority Proposals
 
-| Công cụ AI | Dùng cho phần nào                                                    | Bạn đã kiểm tra/chỉnh sửa thế nào                                              |
-| ---------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| ChatGPT    | Hỗ trợ rà soát Test Case, Bug Report và xây dựng Test Summary Report | Nhóm đã kiểm tra, chỉnh sửa và xác nhận lại toàn bộ nội dung trước khi sử dụng |
+> Priority criteria are determined based on the impact on the system's core business logic and the severity of the defect.
+
+| Order | Bug          | Severity | Reason for Priority                                                                                  |
+| ----- | ------------ | -------- | ---------------------------------------------------------------------------------------------------- |
+| 1     | BUG-REQ04-01 | High     | Violates a critical business rule by allowing borrowing beyond the specified limits.                 |
+| 2     | BUG-REQ07-01 | High     | Accepts incorrectly formatted emails, reducing data quality and impacting related functionalities.   |
+| 3     | BUG-REQ06-01 | High     | The category filter uses an incorrect algorithm, mixed-displaying borrowing slips across multiple states. |
+| 4     | BUG-REQ03-02 | High     | The search and filter logic operates incorrectly, returning inaccurate results to users.            |
+| 5     | BUG-REQ06-01 | Medium   | The overdue filter displays incorrect data, affecting borrowing slip management capabilities.        |
+| 6     | BUG-REQ03-01 | Medium   | Fails to handle redundant whitespaces in search keywords.                                            |
+| 7     | BUG-REQ05-01 | Medium   | Lacks a confirmation mechanism prior to returning books, making accidental operations likely.        |
+| 8     | BUG-REQ02-01 | Medium   | Book status does not synchronize instantaneously across working sessions.                            |
+
+---
+
+## 6. Conclusion
+
+Through the execution of 39 test cases, the system achieved a 74.35% Pass rate, detecting a total of 8 defects with 2 cases Blocked due to a lack of test data.
+
+The results indicate that the basic functions of the system operate relatively stably, particularly the Login and Borrowing Slip Lookup features. However, the system still suffers from multiple defects that directly impact core business flows such as book borrowing limits, member management, and data search processing.
+
+Given the current High-severity defects, the team assesses that the system does not yet meet the criteria for official release. Priority must be given to fixing these critical defects, executing regression testing, and re-validating all related functionalities before deployment to the Production environment.
+
+---
+
+## 7. Lessons Learned
+
+* Building the Input Domain Model (IDM) prior to Test Case design helps fully identify the data classes that need testing.
+* Critical defects are usually concentrated in the business logic processing rather than the user interface.
+* The quality of test data directly affects the ability to execute comprehensive test scenarios.
+* Maintaining the traceability link among Requirements, Test Cases, Test Execution, and Bug Reports enhances traceability and quality management.
+
+---
+
+## 8. AI Usage Declaration
+
+| AI Tool | Component Used For                                                 | How You Inspected/Edited It                                                |
+| ------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| ChatGPT | Supported reviewing Test Cases, Bug Reports, and building the Test Summary Report | The team inspected, edited, and re-verified the entire content before use. |
