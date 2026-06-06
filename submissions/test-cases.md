@@ -1,83 +1,144 @@
-# Test Cases — Bảng trường hợp kiểm thử
+# Test Cases — Test Case Table
 
-> **Hướng dẫn**: Viết tối thiểu **20 TC** phủ đủ các chức năng chính (REQ-01 → REQ-08).
-> Xem [examples/sample-test-case.md](../examples/sample-test-case.md) để hiểu cách viết TC tốt.
-> Tự tổ chức và phân nhóm test case theo cách hợp lý nhất.
+> **Instructions**: Write at least **20 test cases** covering all main functionalities (REQ-01 → REQ-08).
+> Refer to [examples/sample-test-case.md](../examples/sample-test-case.md) to understand how to write effective test cases.
+> Organize and group the test cases in the most logical and appropriate way.
 
-| Thông tin | |
-|---|---|
-| **Nhóm** | `<!-- Tên nhóm -->` |
-| **Ngày tạo** | `<!-- DD/MM/YYYY -->` |
-| **Hệ thống** | https://stqa.rbc.vn |
-| **Tham chiếu** | SRS v1.0 |
+| Information      |                          |
+| ---------------- | ------------------------ |
+| **Group**        | `<!-- STQA_Group_03 -->` |
+| **Created Date** | `<!-- 19/05/2026 -->`    |
+| **System**       | https://stqa.rbc.vn      |
+| **Reference**    | SRS v1.0                 |
 
 ---
 
-## Bước 1: Mô hình hóa miền đầu vào — Input Domain Modeling (IDM)
+## Step 1: Input Domain Modeling (IDM)
 
-> 📖 **Textbook:** Chương 6 — *Input Domain Modeling*, Paul Ammann & Jeff Offutt.
+> 📖 **Textbook:** Chapter 6 — _Input Domain Modeling_, Paul Ammann & Jeff Offutt.
 >
-> **Trước khi viết Test Case**, nhóm **phải** phân tích miền đầu vào bằng bảng IDM bên dưới.
-> Mỗi chức năng cần xác định: **Đặc tính (Characteristic)**, **Phân vùng (Block/Partition)**, và **Giá trị đại diện (Value)**.
+> **Before writing Test Cases**, the team **must** analyze the input domain using the IDM table below.
+> For each functionality, identify: **Characteristic**, **Block/Partition**, and **Representative Value**.
 
-### IDM — Đăng nhập (REQ-01)
+### IDM — Login (REQ-01)
 
-| Đặc tính (Characteristic) | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi |
-|---|---|---|---|
-| Email có tồn tại trong DB? | Có | `librarian@library.com` | Đăng nhập thành công |
-| | Không | `noone@email.com` | Thông báo lỗi |
-| Mật khẩu có đúng? | Đúng | `admin123` | Đăng nhập thành công |
-| | Sai | `wrongpass` | Thông báo lỗi |
-| Ô nhập có rỗng? | Không rỗng | (giá trị bất kỳ) | Xử lý bình thường |
-| | Rỗng | `""` | Thông báo "Vui lòng nhập..." |
+| Characteristic                        | Block/Partition | Representative Value    | Expected Result                   |
+| ------------------------------------- | --------------- | ----------------------- | --------------------------------- |
+| Does the email exist in the database? | Yes             | `librarian@library.com` | Login successful                  |
+|                                       | No              | `noone@email.com`       | Error message displayed           |
+| Is the password correct?              | Correct         | `admin123`              | Login successful                  |
+|                                       | Incorrect       | `wrongpass`             | Error message displayed           |
+| Is the input field empty?             | Not empty       | (any valid value)       | Processed normally                |
+|                                       | Empty           | `""`                    | Display "Please enter..." message |
 
-### IDM — Tìm kiếm sách (REQ-03)
+### IDM — View Book List (REQ-02)
 
-| Đặc tính (Characteristic) | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi |
-|---|---|---|---|
-| Từ khóa có tồn tại trong DB? | Có (tên sách) | `"Flutter"` | Hiển thị sách chứa "Flutter" |
-| | Có (tên tác giả) | `"Nguyễn"` | Hiển thị sách của tác giả Nguyễn |
-| | Không | `"XYZ123"` | Danh sách rỗng |
-| Phân biệt HOA/thường? | Chữ thường | `"flutter"` | Kết quả giống "Flutter" |
-| | Chữ HOA | `"FLUTTER"` | Kết quả giống "Flutter" |
+| Characteristic           | Block/Partition               | Representative Value              | Expected Result                                                                                                  |
+| ------------------------ | ----------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| User Role                | Member                        | `dam.tran@email.com`              | Access is granted, and a user-friendly book list interface is displayed.                                         |
+|                          | Librarian                     | `librarian@email.com`             | Access is granted, and the book list is displayed with administrative management tools.                          |
+| Book Information Display | All required fields displayed | Book ID: `BOOK001`                | Each book card displays all 5 pieces of information: Book Title, Author, Category, Publication Year, and Status. |
+| Data Synchronization     | Real-time update              | Book status changes to "Borrowed" | The status is updated instantly on other active sessions without requiring a page refresh.                       |
 
-### IDM — Mượn sách (REQ-04, REQ-05)
+### IDM — Search & Filter Books (REQ-03)
 
-| Đặc tính (Characteristic) | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi |
-|---|---|---|---|
-| Trạng thái sách? | Có sẵn | BOOK001 | Cho phép mượn |
-| | Đang mượn | BOOK003 | Không cho phép |
-| | Thất lạc | BOOK007 | Không cho phép |
-| Trạng thái thành viên? | Hoạt động | MEM002 | Cho phép mượn |
-| | Tạm ngưng | MEM004 | Từ chối, thông báo lỗi |
-| | Hết hạn | MEM005 | Từ chối, thông báo lỗi |
-| Số sách đang mượn? | < 3 (BVA: 0, 1, 2) | MEM006 (0 sách) | Cho phép mượn |
-| | = 3 (BVA: giới hạn) | MEM đã mượn 3 sách | Từ chối, thông báo vượt giới hạn |
+| Characteristic           | Block/Partition                  | Representative Value                           | Expected Result                                                                            |
+| ------------------------ | -------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Search Keyword Input     | Lowercase                        | `"flutter"`                                    | Returns accurate search results regardless of letter case.                                 |
+|                          | Uppercase                        | `"FLUTTER"`                                    | Returns accurate search results regardless of letter case.                                 |
+| String Format            | Contains leading/trailing spaces | `" Flutter "`                                  | The system automatically trims extra spaces and returns the correct book results.          |
+| Category Filter Logic    | Category selected                | Category: `"Technology"`                       | The displayed list is narrowed down to only books belonging to the selected category.      |
+| Combined Search & Filter | AND condition                    | Category: `"Economics"` + Keyword: `"Flutter"` | Returns an empty list and displays the message "No books found".                           |
+| Restore Default List     | Clear search/filter              | Perform reset/clear action                     | The interface clears the keyword and filters, then reloads the complete default book list. |
 
-### IDM — `<!-- Nhóm tự bổ sung cho REQ-05 đến REQ-08 -->`
+### IDM — Borrow Book (REQ-04)
 
-| Đặc tính (Characteristic) | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi |
-|---|---|---|---|
-| `<!-- Nhóm tự điền -->` | | | |
+| Characteristic           | Block/Partition           | Representative Value                             | Expected Result                                                          |
+| ------------------------ | ------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------ |
+| Book Status              | Available                 | `BOOK001`                                        | Borrowing is allowed                                                     |
+|                          | Borrowed                  | `BOOK003`                                        | Borrowing is not allowed                                                 |
+|                          | Lost                      | `BOOK007`                                        | Borrowing is not allowed                                                 |
+| Member Status            | Active                    | `thanh.nguyen@email.com`                         | Borrowing is allowed                                                     |
+|                          | Blocked                   | `cu.le@email.com`                                | Request is rejected, and an error message is displayed                   |
+|                          | Expired                   | `binh.pham@email.com`                            | Request is rejected, and an error message is displayed                   |
+| Number of Borrowed Books | < 3 (BVA: 0, 1, 2)        | Account currently borrowing 1 book               | Borrowing is allowed                                                     |
+|                          | = 3 (BVA: Boundary Limit) | `dam.tran@email.com` (already borrowing 3 books) | Request is rejected, and a borrowing limit exceeded message is displayed |
 
-> 💡 **Gợi ý kỹ thuật**: Sử dụng **Phân lớp tương đương (EP)** cho các phân vùng rời rạc, **Phân tích giá trị biên (BVA)** cho các phân vùng số (ví dụ: giới hạn 3 sách). Xem textbook §6.1–6.3.
+### IDM — Return Book (REQ-05)
 
----
+| Characteristic           | Block/Partition       | Representative Value             | Expected Result                                                  |
+| ------------------------ | --------------------- | -------------------------------- | ---------------------------------------------------------------- |
+| Login Status             | Logged in             | Member account                   | Access is granted and the user can return books                  |
+|                          | Not logged in         | No active session                | Redirected to the login page                                     |
+| Borrow Record Due Date   | On time               | Borrow record is still valid     | Book is returned successfully without any warning                |
+|                          | Overdue               | Borrow record has expired        | Book is returned successfully with an overdue warning message    |
+| Button Status            | Book not yet returned | Borrow record status: "Borrowed" | The "Return Book" button is displayed on the interface           |
+|                          | Book already returned | Borrow record status: "Returned" | The "Return Book" button is hidden, preventing duplicate actions |
+| User Confirmation Action | Confirm Return        | Click the "Confirm" button       | The system successfully processes the book return                |
+|                          | Cancel Action         | Click the "Cancel" button        | The dialog box closes, and the borrow record remains unchanged   |
 
-## Bước 2: Test Cases
+### IDM — Overdue Processing (REQ-06)
 
-<!-- Tự tổ chức bảng test case: có thể chia nhóm theo chức năng, theo REQ, hoặc theo luồng nghiệp vụ — tùy nhóm quyết định. -->
-<!-- Mỗi TC phải ánh xạ ngược về ít nhất 1 dòng trong bảng IDM ở Bước 1. -->
+| Characteristic      | Block/Partition       | Representative Value               | Expected Result                                                           |
+| ------------------- | --------------------- | ---------------------------------- | ------------------------------------------------------------------------- |
+| User Role           | Librarian             | `librarian@library.com`            | The feature is displayed, and overdue scanning is allowed                 |
+|                     | Regular Member        | Member account                     | The feature button is hidden, and direct URL access is blocked            |
+| Overdue Record Data | Overdue records exist | Existing overdue record (`BR001`)  | The system automatically scans and updates the record status to "Overdue" |
+|                     | No overdue records    | System contains no overdue records | The system displays the message "0 overdue records"                       |
+| List Filter         | Filter applied        | Select filter = `"Overdue"`        | The list displays only records with the "Overdue" status                  |
+| Member Interface    | View overdue record   | Borrow record is overdue           | The status is highlighted prominently (e.g., red color, bold text)        |
 
-| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-| | | | | | | | |
+### IDM — Member Management / Add New Member (REQ-07)
 
----
+| Characteristic     | Block/Partition          | Representative Value    | Expected Result                                                              |
+| ------------------ | ------------------------ | ----------------------- | ---------------------------------------------------------------------------- |
+| User Role          | Librarian                | `librarian@library.com` | The "Add New" button is visible and accessible                               |
+|                    | Regular Member           | `dam.tran@email.com`    | The button is hidden, and direct URL access is blocked                       |
+| Email Input Format | Valid (contains @ and .) | `binh.ly@email.com`     | New member creation is allowed                                               |
+|                    | Invalid format           | `loi.vu@email`          | Member creation is blocked, and an error message is displayed                |
+| Email Uniqueness   | Does not exist           | `binh.ly@email.com`     | Member is created successfully                                               |
+|                    | Already exists           | `ba.nguyen@email.com`   | Member creation is blocked, and a duplicate email error message is displayed |
 
-## Tổng hợp
+### IDM — Borrow Record Lookup (REQ-08)
 
-| Nhóm chức năng | Số TC | REQ phủ | Kỹ thuật IDM áp dụng |
-|----------------|-------|---------|----------------------|
-| | | | |
-| **Tổng** | **<!-- ≥ 20 -->** | | |
+| Characteristic                  | Block/Partition               | Representative Value                    | Expected Result                                                                    |
+| ------------------------------- | ----------------------------- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| User Role                       | Librarian                     | `librarian@library.com`                 | Displays all 5 borrow records of all members                                       |
+|                                 | Regular Member                | `dam.tran@email.com`                    | Displays only the user's 2 personal borrow records (`BR002`, `BR005`)              |
+| Account Status                  | Active                        | `dam.tran@email.com`                    | Access to the borrow record list is granted normally                               |
+|                                 | Blocked / Expired             | `cu.le@email.com`                       | Other users' records are not displayed, and the interface shows no accessible data |
+| Account Validity                | Valid credentials             | Existing system accounts                | Login is successful, and data lookup is allowed                                    |
+|                                 | Invalid credentials           | `khongtontai@email.com`                 | Access is denied, and the lookup module is completely blocked                      |
+| Borrow Record Display Structure | All required fields displayed | Borrow record information block `BR003` | Displays all 5 fields: Record ID, Book, Member Name, Date, and Status              |
+
+> 💡 **Technical Hint**: Use **Equivalence Partitioning (EP)** for discrete partitions and **Boundary Value Analysis (BVA)** for numeric partitions (e.g., the 3-book borrowing limit). See textbook §6.1–6.3.
+
+## Step 2: Test Cases
+
+| Test Case ID | Test Objective                                                                       | Preconditions                                                                          | Test Steps                                                                                                                                                          | Input Data                                                                                                                     | Expected Result (Strong Oracle)                                                                                                                                                                                             | REQ    | Technique                        |
+| ------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------------------------------- |
+| **TC-01-01** | Verify successful login with valid credentials                                       | The browser has been refreshed (F5). The user is on the login screen.                  | 1. Enter a valid email.<br>2. Enter a valid password.<br>3. Click the Login button.<br>4. Observe the interface.                                                    | Email: `librarian@library.com`<br>Password: `admin123`                                                                         | Login is successful and the user is redirected to the homepage. The AppBar displays "Nguyễn Thủ Thư (Librarian)". No error messages are shown.                                                                              | REQ-01 | EP                               |
+| **TC-01-02** | Verify login with an incorrect password (Negative Test)                              | The browser has been refreshed (F5). The user is on the login screen.                  | 1. Enter a valid email.<br>2. Enter an incorrect password.<br>3. Click the Login button.                                                                            | Email: `dam.tran@email.com`<br>Password: `wrongpass`                                                                           | The system rejects the login attempt. An error message is displayed: “Incorrect password”. The page does not redirect.                                                                                                      | REQ-01 | Negative Testing                 |
+| **TC-01-03** | Verify login with a non-existing email address                                       | The browser has been refreshed (F5). The user is on the login screen.                  | 1. Enter a non-existing email address.<br>2. Enter any password.<br>3. Click the Login button.                                                                      | Email: `noone@email.com`<br>Password: `password123`                                                                            | The system blocks the login attempt and displays the correct message: “Member not found”. No session is created.                                                                                                            | REQ-01 | EP                               |
+| **TC-01-04** | Verify validation when both Email and Password fields are empty                      | The browser has been refreshed (F5). The user is on the login screen.                  | 1. Leave the Email field empty.<br>2. Leave the Password field empty.<br>3. Click the Login button.                                                                 | Email: `""`<br>Password: `""`                                                                                                  | The system displays the message: “Please enter email and password”. No request is sent to the server.                                                                                                                       | REQ-01 | EP, BVA                          |
+| **TC-01-05** | Verify validation for an invalid email format                                        | The browser has been refreshed (F5). The user is on the login screen.                  | 1. Enter an invalid email format.<br>2. Enter any password.<br>3. Click the Login button.                                                                           | Email: `abcgmail.com`<br>Password: `password123`                                                                               | The system rejects the request and displays an invalid email format error message on the interface.                                                                                                                         | REQ-01 | EP                               |
+| **TC-02-01** | View Book List – Verify complete display of all required UI fields                   | Logged into the system with any valid account.                                         | 1. Navigate to the system homepage.<br>2. Observe any book card displayed on the interface (e.g., BOOK001).                                                         | Valid account                                                                                                                  | Each book card clearly displays all 5 mandatory fields: Book Title, Author, Category, Publication Year, and Status.                                                                                                         | REQ-02 | Happy Path / UI                  |
+| **TC-02-02** | View book list under the Member role interface                                       | Logged in with a Member account.                                                       | 1. Navigate to the system homepage.<br>2. Verify the display of the overall book list.                                                                              | `dam.tran@email.com`                                                                                                           | The book list is displayed normally with a clean, user-friendly interface optimized for searching and borrowing books.                                                                                                      | REQ-02 | Happy Path / Authorization       |
+| **TC-02-03** | View book list under the Librarian role interface                                    | Logged in with a Librarian account.                                                    | 1. Navigate to the book management screen.<br>2. Verify the display of the book list.                                                                               | `librarian@email.com`                                                                                                          | The book list is displayed completely with detailed information and includes system management tools and administrative functions available only to Librarians.                                                             | REQ-02 | Happy Path / Authorization       |
+| **TC-02-04** | View Book List – Verify real-time status synchronization                             | Two accounts are logged in simultaneously on two separate devices or browser sessions. | 1. From the Member account, borrow book `BOOK003`.<br>2. From the Librarian account, observe the book status without refreshing the page.                           | Book ID: `BOOK003`                                                                                                             | The status of book `BOOK003` on the Librarian's screen is automatically updated from "Available" to "Borrowed" immediately without requiring an F5 refresh.                                                                 | REQ-02 | Real-time / Data Synchronization |
+| **TC-03-01** | Search books using a lowercase keyword                                               | Logged into the system and currently on the homepage.                                  | 1. Enter the lowercase keyword `"flutter"` in the search bar.<br>2. Press Enter or click the search icon.                                                           | Keyword: `"flutter"`                                                                                                           | The system correctly filters and displays the matching book, "Basic Flutter Programming".                                                                                                                                   | REQ-03 | Happy Path / Search              |
+| **TC-03-02** | Search books using an uppercase keyword (Case-Insensitive Search)                    | Logged into the system and currently on the homepage.                                  | 1. Enter the uppercase keyword `"FLUTTER"` in the search bar.<br>2. Execute the search operation.                                                                   | Keyword: `"FLUTTER"`                                                                                                           | The system performs a case-insensitive search and correctly returns the book "Basic Flutter Programming".                                                                                                                   | REQ-03 | Robustness / Search              |
+| **TC-03-03** | Search books with leading and trailing spaces in the keyword (Trim Space)            | Logged into the system and currently on the homepage.                                  | 1. Enter the keyword with extra spaces at both ends: `" Flutter "` in the search box.<br>2. Click Search and review the results.                                    | Keyword: `" Flutter "`                                                                                                         | The system automatically trims the unnecessary spaces, performs the original search query, and correctly displays the book "Basic Flutter Programming".                                                                     | REQ-03 | Boundary / String Handling       |
+| **TC-03-04** | Narrow the book list using the Category filter                                       | Logged into the system and currently on the homepage.                                  | 1. From the Category filter toolbar, select the category `"Technology"`.<br>2. Observe the displayed results.                                                       | Filter: `"Technology"`                                                                                                         | The system accurately filters the list and displays only books belonging to the Technology category without including books from other categories.                                                                          | REQ-03 | Happy Path / Filter              |
+| **TC-03-05** | Search keyword combined with an unrelated Category filter (Search & Filter Conflict) | Logged into the system and currently on the homepage.                                  | 1. Activate the Category filter `"Economics"`.<br>2. Enter the technology-related keyword `"Flutter"` in the search box.<br>3. Execute the search query.            | Category: `"Economics"`<br>Keyword: `"Flutter"`                                                                                | The system applies AND logic correctly. Since Flutter books do not belong to the Economics category, the result list is empty and the message "No books found" is displayed.                                                | REQ-03 | Business Logic / AND             |
+| **TC-03-06** | Clear search keyword and filters to restore the default book list                    | The system is currently displaying a filtered or narrowed search result list.          | 1. Clear all characters from the search box.<br>2. Deselect the active Category filter.<br>3. Observe the interface.                                                | Action: Click Reset / Clear                                                                                                    | The search box becomes empty, all filters are removed, and the system automatically reloads and displays the complete default book list.                                                                                    | REQ-03 | UI / Reset                       |
+| **TC-04-01** | Verify successful book borrowing (Rule 1)                                            | The account status is Active.                                                          | 1. Log in to the system.<br>2. Find a book with the status "Available" in the book list.<br>3. Click the "Borrow Book" button.                                      | - Email: `ba.nguyen@email.com`<br>- Password: `password123`<br>- Book: `BOOK001` (Flutter-related book)                        | - The system displays the message "Book borrowed successfully".<br>- The status of `BOOK001` immediately changes from "Available" to "Borrowed".<br>- A new record appears in the Borrow Records list.                      | REQ-04 | Decision Table (Rule 1)          |
+| **TC-04-02** | Verify borrowing is blocked when the account is Blocked (Rule 2)                     | The account status is Blocked.                                                         | 1. Log in to the system.<br>2. Select any book with the status "Available".<br>3. Click the "Borrow Book" button.                                                   | - Email: `cu.le@email.com`<br>- Password: `password123`<br>- Book: Any available book                                          | - The system prevents the borrowing action.<br>- An error message is displayed in a Dialog/Toast: "Account is currently blocked".<br>- No borrow record is created.                                                         | REQ-04 | Decision Table (Rule 2)          |
+| **TC-04-03** | Verify borrowing is blocked when the account is Expired (Rule 3)                     | The account status is Expired.                                                         | 1. Log in to the system.<br>2. Select any book with the status "Available".<br>3. Click the "Borrow Book" button.                                                   | - Email: `binh.pham@email.com`<br>- Password: `password123`<br>- Book: Any available book                                      | - The system prevents the borrowing action.<br>- An error message is displayed in a Dialog/Toast: "Account has expired".<br>- No borrow record is created.                                                                  | REQ-04 | Decision Table (Rule 3)          |
+| **TC-04-04** | Verify borrowing is blocked when the 3-book limit is exceeded (Rule 4)               | The account status is Active.                                                          | 1. Log in to the system.<br>2. Borrow three different books that are currently marked as "Available".<br>3. Select a fourth available book and click "Borrow Book". | - Email: `dam.tran@email.com`<br>- Password: `password123`<br>- Four available books                                           | - In Step 2: The system allows borrowing of the first three books successfully.<br>- In Step 3: The system blocks the fourth borrowing request and displays the error message: "Maximum borrowing limit reached (3 books)". | REQ-04 | Decision Table (Rule 4) + BVA    |
+| **TC-04-05** | Verify borrowing is blocked for a book that has already been borrowed (Rule 5)       | The account status is Active.                                                          | 1. Log in to the system.<br>2. Locate a book with the status "Borrowed" or "Lost".<br>3. Attempt to borrow the book.                                                | - Email: `dam.tran@email.com`<br>- Password: `password123`<br>- A book currently marked as "Borrowed" or "Lost" on the website | - The "Borrow Book" button is disabled (grayed out) and cannot be clicked, OR the system displays the error message: "Book is not available for borrowing".                                                                 | REQ-04 | Decision Table (Rule 5)          |
+| **TC-05-01** | Return a book on time – successful without warning                                   | Logged in as a member. There is one active borrow record that is not overdue.          | 1. Navigate to "My Borrow Records".<br>2. Select a borrow record that is not overdue.<br>3. Click "Return Book".<br>4. Confirm the action.                          | Any borrow record ID                                                                                                           | The message "Book returned successfully" is displayed. The book is removed from the active borrow list and its status changes to "Available" in the inventory. No overdue warning is shown.                                 | REQ-05 | Happy Path                       |
+| **TC-05-02** | Return an overdue book – successful with warning                                     | Logged in as a member. There is an overdue borrow record (due date < today).           | Same steps as TC-05-01, but select an overdue borrow record.                                                                                                        | Overdue borrow record ID                                                                                                       | The return is processed successfully. A warning message "Book returned overdue" is displayed. The book status is updated correctly in the inventory.                                                                        | REQ-05 | Negative / Warning               |
+| **TC-05-03** | Return a book that has already been returned – system hides the action button        | A borrow record has already been returned previously.                                  | 1. Navigate to "Borrow History".<br>2. Locate a borrow record with status "Returned".<br>3. Check the available actions.                                            | Returned borrow record ID                                                                                                      | The system does not display the "Return Book" button for a returned record, preventing duplicate return actions.                                                                                                            | REQ-05 | Boundary / UX                    |
+| **TC-05-04** | Return a book without logging in – redirect to login page                            | User is not logged in (using an incognito/private browser window).                     | 1. Open an incognito/private browser window.<br>2. Access the return-book URL directly (if known).<br>3. Observe system behavior.                                   | No input data                                                                                                                  | The system automatically redirects the user to the login page or displays a message requiring authentication before access is granted.                                                                                      | REQ-05 | Security                         |
+| **TC-05-05** | Cancel the return-book operation – no changes applied                                | Logged in as a member and currently borrowing at least one book.                       | 1. Navigate to "My Borrow Records".<br>2. Click "Return Book".<br>3. In the confirmation dialog, select **Cancel**.                                                 | Active borrow record ID                                                                                                        | The dialog closes. The borrow record remains in the "Borrowed" status and the book is not returned.                                                                                                                         | REQ-05 | UI                               |
