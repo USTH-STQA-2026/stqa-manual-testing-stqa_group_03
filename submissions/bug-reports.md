@@ -467,8 +467,7 @@ Add or update the email validation Regex. The validation rule must require at le
 **Evidence:**
 
 - Attached screenshot: <img width="2940" height="1636" alt="image" src="https://github.com/user-attachments/assets/c475c39f-d6ca-4f2c-8534-622cc677a3fe" />
-
-*Suggested Fix*: Implement a strict server-side authorization check inside the Borrowing Record Lookup endpoint. Before returning any record details, the backend must verify if the `User ID` of the currently logged-in session matches the `Owner ID` associated with the requested borrow record/slip ID. If they do not match, the system must reject the request immediately and return an HTTP `403 Forbidden` status code.
+**Suggested Fix:** Implement a strict server-side authorization check inside the Borrowing Record Lookup endpoint. Before returning any record details, the backend must verify if the `User ID` of the currently logged-in session matches the `Owner ID` associated with the requested borrow record/slip ID. If they do not match, the system must reject the request immediately and return an HTTP `403 Forbidden` status code.
 ---
 
 
