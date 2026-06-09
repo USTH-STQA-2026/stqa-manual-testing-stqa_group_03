@@ -19,13 +19,13 @@
 
 | Metric                     | Value   |
 | -------------------------- | ------- |
-| Total Test Cases           | 39      |
+| Total Test Cases           | 41      |
 | Pass                       | 29      |
-| Fail                       | 8       |
+| Fail                       | 10      |
 | Blocked                    | 2       |
 | Not Run                    | 0       |
-| **Pass Rate**              | 74.35%  |
-| **Number of Detected Bugs**| 8       |
+| **Pass Rate**              | 70.73%  |
+| **Number of Detected Bugs**| 10      |
 
 ### Distribution by Functional Group
 
@@ -33,18 +33,18 @@
 | ------------------------------ | -- | ---- | ---- | --- | ----------------- |
 | REQ-01: Login                  | 5  | 5    | 0    | 0   | Good              |
 | REQ-02: View Book List         | 4  | 3    | 1    | 1   | Fairly Good       |
-| REQ-03: Search & Filter Books  | 6  | 4    | 2    | 2   | Needs Improvement |
+| REQ-03: Search & Filter Books  | 7  | 4    | 3    | 2   | Needs Improvement |
 | REQ-04: Borrow Books           | 5  | 4    | 1    | 1   | Needs Improvement |
 | REQ-05: Return Books           | 5  | 3    | 1    | 1   | Average           |
 | REQ-06: Overdue Processing     | 5  | 3    | 1    | 1   | Average           |
 | REQ-07: Member Management      | 4  | 2    | 2    | 2   | Poor              |
-| REQ-08: Look up Borrowing Slips| 5  | 5    | 0    | 0   | Good              |
+| REQ-08: Look up Borrowing Slips| 6  | 5    | 1    | 0   | Fairly Good       |
 
 ### Bug Distribution by Severity
 
 | Severity | Quantity | Bug IDs                                                          |
 | -------- | -------- | ---------------------------------------------------------------- |
-| High     | 5        | BUG-REQ01-01, BUG-REQ03-02, BUG-REQ04-01, BUG-REQ06-01, BUG-REQ07-01 |
+| High     | 7        | BUG-REQ01-01, BUG-REQ03-02, BUG-REQ04-01, BUG-REQ06-01, BUG-REQ07-01 , BUG-REQ03-03, BUG-REQ08-01|
 | Medium   | 3        | BUG-REQ02-01, BUG-REQ03-01, BUG-REQ05-01                         |
 | Low      | 0        | None                                                             |
 
@@ -72,7 +72,6 @@
 ### 4.1. Strengths
 
 * The **Login (REQ-01)** function operates stably with a **100%** Pass rate, accurately handling valid and invalid login scenarios.
-* The **Look up Borrowing Slips (REQ-08)** function fully meets specification requirements with a **100%** Pass rate, ensuring role authorization and user data security.
 * Core business processes such as **viewing book lists, borrowing books, and returning books** all perform well under normal usage scenarios.
 * The **role authorization mechanism between Member and Librarian** is deployed relatively accurately, effectively restricting unauthorized access.
 * The system interface is intuitive, with information clearly and consistently presented, facilitating easy user operations.
@@ -84,8 +83,9 @@
 * The **Borrow Books (REQ-04)** function fails to properly apply borrowing quantity limit rules, allowing users to exceed the specified limits.
 * The **Return Books (REQ-05)** function lacks a confirmation step prior to data updates, increasing the risk of accidental operations by users.
 * The **Overdue Processing (REQ-06)** function still contains defects in data filtering, as it displays slips that do not belong to the overdue state.
+* The **Look up Borrowing Slips (REQ-08)** function fails to fully meet security specifications, achieving an **83.33%** Pass rate due to a critical authorization control defect that allows data leakage between member accounts.
 * Certain test cases were **Blocked** due to data and test environment limitations, making it impossible to fully evaluate all business scenarios.
-* With a Pass rate of **74.35%**, the system meets most functional requirements; however, business logic and data validation defects must be resolved prior to official deployment.
+* With a Pass rate of **70.73%**, the system meets most functional requirements; however, business logic and data validation defects must be resolved prior to official deployment.
 
 ---
 
@@ -99,16 +99,18 @@
 | 2     | BUG-REQ07-01 | High     | Accepts incorrectly formatted emails, reducing data quality and impacting related functionalities.   |
 | 3     | BUG-REQ06-01 | High     | The category filter uses an incorrect algorithm, mixed-displaying borrowing slips across multiple states. |
 | 4     | BUG-REQ03-02 | High     | The search and filter logic operates incorrectly, returning inaccurate results to users.            |
-| 5     | BUG-REQ06-01 | Medium   | The overdue filter displays incorrect data, affecting borrowing slip management capabilities.        |
-| 6     | BUG-REQ03-01 | Medium   | Fails to handle redundant whitespaces in search keywords.                                            |
-| 7     | BUG-REQ05-01 | Medium   | Lacks a confirmation mechanism prior to returning books, making accidental operations likely.        |
-| 8     | BUG-REQ02-01 | Medium   | Book status does not synchronize instantaneously across working sessions.                            |
+| 5     | BUG-REQ08-01 | High     | Violates data privacy control by allowing cross-user access to confidential borrowing history via ID. |
+| 6     | BUG-REQ03-03 | High     | Case-sensitive filtering logic completely blocks users from finding books using lowercase terms. |
+| 7     | BUG-REQ06-01 | Medium   | The overdue filter displays incorrect data, affecting borrowing slip management capabilities.        |
+| 8     | BUG-REQ03-01 | Medium   | Fails to handle redundant whitespaces in search keywords.                                            |
+| 9     | BUG-REQ05-01 | Medium   | Lacks a confirmation mechanism prior to returning books, making accidental operations likely.        |
+| 10    | BUG-REQ02-01 | Medium   | Book status does not synchronize instantaneously across working sessions.                            |
 
 ---
 
 ## 6. Conclusion
 
-Through the execution of 39 test cases, the system achieved a 74.35% Pass rate, detecting a total of 8 defects with 2 cases Blocked due to a lack of test data.
+Through the execution of 39 test cases, the system achieved a 70.73% Pass rate, detecting a total of 10 defects with 2 cases Blocked due to a lack of test data.
 
 The results indicate that the basic functions of the system operate relatively stably, particularly the Login and Borrowing Slip Lookup features. However, the system still suffers from multiple defects that directly impact core business flows such as book borrowing limits, member management, and data search processing.
 
