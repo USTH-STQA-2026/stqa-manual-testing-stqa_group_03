@@ -77,10 +77,10 @@
 |----------------|---------:|-----:|-----:|---------:|----------:|
 | REQ-01: Login | 5 | 5 | 0 | 0 | 100.00% |
 | REQ-02: View Book List | 4 | 3 | 1 | 0 | 75.00% |
-| REQ-03: Search & Filter Books | 7 | 4 | 3 | 0 | 66.67% |
+| REQ-03: Search & Filter Books | 7 | 4 | 3 | 0 | 57.14% |
 | REQ-04: Borrow Books | 5 | 4 | 1 | 0 | 80.00% |
 | REQ-05: Return Books | 5 | 3 | 1 | 1 | 60.00% |
 | REQ-06: Overdue Processing | 5 | 3 | 1 | 1 | 60.00% |
 | REQ-07: Member Management | 4 | 2 | 2 | 0 | 50.00% |
-| REQ-08: Borrowing Record Lookup | 6 | 5 | 1 | 0 | 100.00% |
+| REQ-08: Borrowing Record Lookup | 6 | 5 | 1 | 0 | 83.33% |
 | **Total** | **41** | **29** | **10** | **2** | **70.73%** |
