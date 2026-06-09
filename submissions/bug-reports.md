@@ -395,6 +395,80 @@ Invalid and improperly formatted data can be stored in the database. This violat
 **Suggested Fix:**
 Add or update the email validation Regex. The validation rule must require at least one dot (`.`) after the `@` symbol in the domain part (e.g., `@domain.com`).
 
+## 9. BUG-REQ03-03: System Fails to Match Valid Category Name Due to Case Sensitivity
+
+**Bug ID:** BUG-09 (Reference: TC-03-07)
+
+**Title:** The system displays the error message "Không tìm thấy sách nào." and fails to filter the book list when a valid category name is entered entirely in lowercase (e.g., "công nghệ")
+
+**Environment:**
+
+- Browser: Chrome Version 125.0.0
+- Operating System: Windows / macOS
+- Application: Library Book Borrowing System (https://stqa.rbc.vn)
+
+**Preconditions:**
+
+- The user has successfully logged into the system and is currently on the homepage.
+- The default book list dataset contains valid books belonging to the `"Công nghệ"` category.
+
+**Steps to Reproduce:**
+
+1. Locate the **Category filter** toolbar on the homepage interface.
+2. In the search/filter field, type the category name entirely in lowercase letters: `công nghệ`.
+3. Observe the displayed book results on the screen.
+
+**Expected Result:** The system automatically standardizes the string format, handles case-insensitive matching, and successfully narrows down the displayed list to only books belonging to the `"Công nghệ"` category.
+
+**Actual Result:** The system fails to process case-insensitive matching, leaves the main book shelf area completely empty, and displays a text notification stating `"Không tìm thấy sách nào."`
+
+**Impact:** The book filtering workflow is incorrectly blocked because the system strictly requires exact uppercase/lowercase matches. This causes a poor user experience, as normal users often type in lowercase, leading them to falsely believe the library does not have the books they need.
+
+**Severity:** **High** — A Search & Filter Validation Logic defect that directly degrades the usability of a core feature (REQ-03) and misleads users about database availability.
+
+**Evidence:**
+
+- Attached screenshot: <img width="2936" height="1592" alt="image" src="https://github.com/user-attachments/assets/c5266358-f54f-4919-a3c9-81ac4f378138" />
+
+**Suggested Fix:** Review and update the search query or filtering logic in the source code (Frontend/Backend) to incorporate case-insensitive string matching. Both the user's input string and the category names stored in the database should be converted to a uniform casing format (e.g., using `.toLowerCase()` or `.toUpperCase()`) before the string comparison is executed.
+
+## 10. BUG-REQ08-01: Missing Authorization Control on Borrowing Record Lookup via ID
+
+**Bug ID:** BUG-10 (Reference: TC-08-06)
+
+**Title:** Regular member "Nguyễn Học Bá" can unauthorizedly view and access the confidential borrowing records of user "Trấn Dựa Dẫm" by searching the slip ID under the "Mượn / Trả" tab
+
+**Environment:**
+
+- Browser: Chrome Version 125.0.0
+- Operating System: Windows / macOS
+- Application: Library Book Borrowing System (https://stqa.rbc.vn)
+
+**Preconditions:**
+
+- The user has successfully logged into the system with a regular member account (`nguyenhocba@email.com`).
+- A valid borrow record/slip ID belonging to another member (`Trấn Dựa Dẫm`) exists in the database.
+
+**Steps to Reproduce:**
+
+1. Log in using the regular member account: `nguyenhocba@email.com`.
+2. On the main interface, click on the **"Mượn / Trả"** tab.
+3. Input a specific borrow record/slip ID belonging to user `"Trấn Dựa Dẫm"` into the ID search/lookup field.
+4. Observe the displayed details and system behavior.
+
+**Expected Result:** The system maintains strict access control and data privacy. The interface must strictly restrict access, block the query, display an `"Unauthorized"` or `"Access Denied"` error message, and must not display any borrowing records or confidential details belonging to user "Trấn Dựa Dẫm".
+
+**Actual Result:** The system completely fails to perform an authorization check. It successfully processes the query and displays the full, detailed borrowing record history belonging to user `"Trấn Dựa Dẫm"` to the unauthorized account "Nguyễn Học Bá".
+
+**Impact:** A critical Insecure Direct Object Reference (IDOR) vulnerability exists in the system. Any regular member can systematically guess or input record IDs to spy on other users' private borrowing history, leaking sensitive personal data and violating data privacy compliance.
+
+**Severity:** **Critical** — An Authorization Control Logic defect (IDOR) that allows cross-user data leakage and directly breaches data privacy boundaries between different member accounts.
+
+**Evidence:**
+
+- Attached screenshot: <img width="2940" height="1636" alt="image" src="https://github.com/user-attachments/assets/c475c39f-d6ca-4f2c-8534-622cc677a3fe" />
+
+**Suggested Fix:** Implement a strict server-side authorization check inside the Borrowing Record Lookup endpoint. Before returning any record details, the backend must verify if the `User ID` of the currently logged-in session matches the `Owner ID` associated with the requested borrow record/slip ID. If they do not match, the system must reject the request immediately and return an HTTP `403 Forbidden` status code.
 ---
 
 
