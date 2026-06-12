@@ -145,7 +145,8 @@ The system does not remove unnecessary spaces from the search keyword. Instead o
 
 **Evidence:**
 
-* Attached screenshot: `<img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/8f657417-80d3-4532-a058-3c198600b08a" />`
+* Attached screenshot: `<img width="3840" height="2256" alt="image" src="https://github.com/user-attachments/assets/2523ed10-b1ec-485f-b51b-f93411ae1208" />
+`
 * It can be observed that after searching with the keyword `" Flutter "`, the system displays the entire book list instead of results related to Flutter.
 
 **Suggested Fix:**
